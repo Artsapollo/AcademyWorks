@@ -1,15 +1,18 @@
 package HW6;
 
 public class Stocks implements Assets{
-    public void balance() {
-        System.out.println("Show stocks balance");
+    private String name = "Stocks";
+    private int quantity;
+
+    public Stocks(int quantity){
+        this.quantity = quantity;
     }
 
-    public void operations() {
-        System.out.println("Do some operations with stocks");
+    public String getName() {
+        return name;
     }
 
-    public void transactions() {
-        System.out.println("Make transactions with stocks");
+    public int getQuantity() {
+        return quantity;
     }
 }

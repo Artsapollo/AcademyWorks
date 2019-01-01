@@ -1,15 +1,19 @@
 package HW6;
 
 public class Gold implements Assets {
-    public void balance() {
-        System.out.println("Show gold balance ");
+    private final String name = "Gold";
+    private int quantity;
+
+
+    public Gold(int quantity) {
+        this.quantity = quantity;
     }
 
-    public void operations() {
-        System.out.println("Do some operations with gold");
+    public String getName() {
+        return name;
     }
 
-    public void transactions() {
-        System.out.println("Make transactions with gold");
+    public int getQuantity() {
+        return quantity;
     }
 }

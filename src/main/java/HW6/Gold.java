@@ -9,10 +9,12 @@ public class Gold implements Assets {
         this.quantity = quantity;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public int getQuantity() {
         return quantity;
     }

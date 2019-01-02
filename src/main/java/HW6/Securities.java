@@ -1,7 +1,7 @@
 package HW6;
 
 public class Securities implements Assets {
-    private String name = "Securities";
+    private String name;
     private int quantity;
 
     public Securities(int quantity) {
@@ -10,11 +10,16 @@ public class Securities implements Assets {
 
     @Override
     public String getName() {
-        return name;
+        return "Securities";
     }
 
     @Override
     public int getQuantity() {
         return quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Asset" + " name = " + getName() + ", quantity = " + quantity;
     }
 }

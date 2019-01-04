@@ -29,7 +29,7 @@ public class Store {
             }
         }
         System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.println("Yummy " + list.toString());
+        System.out.println("One type " + list.toString());
     }
 
     public List<Fruits> expireTime(Integer expire) {

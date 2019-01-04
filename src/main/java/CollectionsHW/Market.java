@@ -18,7 +18,7 @@ public class Market extends Store {
         Store store = new Store(apple, straw, pear, pine, blue, dragon, dragon1, dragon2);
 
         store.freshFruits(LocalDate.of(2018, 12, 12));
-        store.fruitsType(FruitsType.STRAWBERRY);
+        store.fruitsType(FruitsType.DRAGONFRUIT);
         store.expireTime(10);
         store.stillFresh(FruitsType.DRAGONFRUIT, LocalDate.of(2018, 10, 6));
         store.letsCutThePrice(FruitsType.PEAR, 24, 5.0);

@@ -8,6 +8,13 @@ public class Fruits {
     private LocalDate date;
     private int price;
 
+    public Fruits(Enum type, int expire, LocalDate date, int price) {
+        this.type = type;
+        this.expire = expire;
+        this.date = date;
+        this.price = price;
+    }
+
     public Enum getType() {
         return type;
     }

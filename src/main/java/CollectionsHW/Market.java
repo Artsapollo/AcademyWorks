@@ -2,7 +2,7 @@ package CollectionsHW;
 
 import java.util.List;
 
-public class Market extends Store{
+public class Market extends Store {
     public static void main(String[] args) {
         List<Fruits> fruttis = listOfFruits();
 

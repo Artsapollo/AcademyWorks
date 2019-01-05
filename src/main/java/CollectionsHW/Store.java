@@ -10,7 +10,7 @@ public class Store {
         fruitsList = Arrays.asList(fruits);
     }
 
-    public void freshFruits(LocalDate date) {
+    public List<Fruits> freshFruits(LocalDate date) {
         List<Fruits> list = new ArrayList<>();
         for (Fruits find : fruitsList) {
             if (find.getDate().isAfter(date)) {
@@ -19,9 +19,10 @@ public class Store {
         }
 
         System.out.println("The Freshest " + list.toString());
+        return list;
     }
 
-    public void fruitsType(FruitsType type) {
+    public List<Fruits> fruitsType(FruitsType type) {
         List<Fruits> list = new ArrayList<>();
         for (Fruits find : fruitsList) {
             if (find.getType().equals(type)) {
@@ -30,6 +31,7 @@ public class Store {
         }
         System.out.println("-------------------------------------------------------------------------------------------------");
         System.out.println("One type " + list.toString());
+        return list;
     }
 
     public List<Fruits> expireTime(Integer expire) {

@@ -1,10 +1,8 @@
 package HW7;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
 
 import static HW7.FruitType.*;
 import static HW7.Vitamins.*;
@@ -12,28 +10,33 @@ import static HW7.Vitamins.*;
 public class MainLambdaTemplateStudents {
     public static void main(String[] args) {
         List<Fruit> fruits = fillFruitsList();
-        //fruits.forEach(System.out::println);
+        fruits.forEach(System.out::println);
 
-        //fruits.stream().filter(fruit -> fruit.getFruitType().equals(PEAR))                                               //переменной fruit типа fruits заходим в список и методом get доступном для каждого из объектов, достаём нужный нам по параметру
-        //      .forEach(System.out :: println);
+        fruits.stream().filter(fruit -> fruit.getFruitType().equals(PEAR))
+                .forEach(System.out::println);
+        System.out.println("-------------------------------------------------------");
 
-        // fruits.stream().skip(4)
-        //       .forEach(System.out :: println);
+        fruits.stream().skip(4).forEach(System.out::println);
+        System.out.println("-------------------------------------------------------");
 
-        //fruits.stream().distinct().forEach(System.out::println);
+        fruits.stream().distinct().forEach(System.out::println);
+        System.out.println("-------------------------------------------------------");
 
-        //fruits.stream().map(fruit -> fruit.getFruitType()+" "+fruit.getPrice())
-        //      .forEach(System.out :: println);
+        fruits.stream().map(fruit -> fruit.getFruitType() + " " + fruit.getPrice())
+                .forEach(System.out::println);
+        System.out.println("-------------------------------------------------------");
 
-        // fruits.stream().map(Fruit :: getTypeAndPrice)
-        //       .forEach(System.out :: println);
+        fruits.stream().map(Fruit::getTypeAndPrice)
+                .forEach(System.out::println);
+        System.out.println("-------------------------------------------------------");
 
-        //fruits.stream().peek(Fruit -> System.out.println("TAP"))
-        //      .map(Fruit :: getTypeAndPrice)
-        //   .forEach(System.out :: println);
+        fruits.stream().peek(Fruit -> System.out.println("TAP"))
+                .map(Fruit::getTypeAndPrice)
+                .forEach(System.out::println);
+        System.out.println("-------------------------------------------------------");
 
-        //fruits.stream().limit(4).forEach(System.out :: println);
-
+        fruits.stream().limit(4).forEach(System.out::println);
+        System.out.println("-------------------------------------------------------");
 
         Comparator<Fruit> comparator = new Comparator<Fruit>() {
             @Override
@@ -47,6 +50,79 @@ public class MainLambdaTemplateStudents {
             }
         };
         fruits.stream().sorted(comparator).forEach(System.out::println);
+        System.out.println("-------------------------------------------------------");
+
+        fruits.stream().mapToInt(fruit -> fruit.getPrice())
+                .forEach(System.out::println);
+        System.out.println("-------------------------------------------------------");
+
+
+        fruits.stream().flatMap(fruit -> fruit.getVitamins().stream())
+                .forEach(System.out::println);
+        System.out.println("-------------------------------------------------------");
+
+        Optional<Fruit> opt = fruits.stream().findFirst();
+        if (opt.isPresent()) {
+            System.out.println(opt.get());
+        } else {
+            System.out.println("no value");
+        }
+        System.out.println("-------------------------------------------------------");
+
+        Optional<Fruit> opt1 = fruits.stream().findAny();
+        if (opt1.isPresent()) {
+            System.out.println(opt1.get());
+        } else {
+            System.out.println("no value");
+        }
+        System.out.println("-------------------------------------------------------");
+
+        long l = fruits.stream().count();
+        System.out.println(l + " fruits in list");
+        System.out.println("-------------------------------------------------------");
+
+        boolean boom = fruits.stream().anyMatch(fruit -> fruit.getFruitType().equals(APPLE));
+        System.out.println(boom);
+        System.out.println("-------------------------------------------------------");
+
+        boolean boom2 = fruits.stream().noneMatch(fruit -> fruit.getFruitType().equals("Banjo"));
+        System.out.println(boom2);
+        System.out.println("-------------------------------------------------------");
+
+        boolean boom3 = fruits.stream()
+                .allMatch(fruit -> fruit.getDayToLive() > 3);
+        System.out.println(boom3);
+        System.out.println("-------------------------------------------------------");
+
+        Optional<Fruit> min = fruits.stream().min(Comparator.comparing(Fruit::getDayToLive));
+        System.out.println(min);
+        System.out.println("-------------------------------------------------------");
+
+        Optional<Fruit> max = fruits.stream().max(Comparator.comparing(Fruit::getDayToLive));
+        System.out.println(max);
+        System.out.println("-------------------------------------------------------");
+
+        fruits.stream().forEach(fruit -> System.out.println(fruit.getFruitType()));
+        System.out.println("-------------------------------------------------------");
+
+        fruits.stream().forEachOrdered(fruit -> System.out.println(fruit.getPrice()));
+        System.out.println("-------------------------------------------------------");
+
+        String[] arr = fruits.stream().map(Fruit::getTypeAndPrice).toArray(String[]::new);
+        for (String far : arr) {
+            System.out.println(far);
+        }
+        System.out.println("-------------------------------------------------------");
+
+        int sum = fruits.stream().reduce(0, (x, y) -> {
+                    if (y.getPrice() < 30)
+                        return x + y.getPrice();
+                    else
+                        return x;
+                },
+                (x, y) -> x + y);
+        System.out.println(sum);
+        System.out.println("-------------------------------------------------------");
     }
 
     private static List<Fruit> fillFruitsList() {
@@ -86,4 +162,5 @@ public class MainLambdaTemplateStudents {
 
         return fruits;
     }
+
 }

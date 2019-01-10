@@ -1,8 +1,8 @@
 package HW7;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.function.Predicate;
 
 import static HW7.FruitType.*;
 import static HW7.Vitamins.*;
@@ -11,6 +11,31 @@ public class MainLambdaTemplateStudents {
     public static void main(String[] args) {
         List<Fruit> fruits = fillFruitsList();
         fruits.forEach(System.out::println);
+
+
+        //Deep cloning with serialization
+        List<Fruit> cloneFruits = new ArrayList<>();
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream ous = new ObjectOutputStream(baos);
+
+            ous.writeObject(fruits);
+            ous.close();
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+
+            cloneFruits = (List) ois.readObject();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        fruits.forEach(System.out::println);
+        System.out.println();
+        cloneFruits.forEach(System.out::println);
+
+        System.out.println("-------------------------------------------------------");
+
 
         fruits.stream().filter(fruit -> fruit.getFruitType().equals(PEAR))
                 .forEach(System.out::println);
@@ -123,6 +148,8 @@ public class MainLambdaTemplateStudents {
                 (x, y) -> x + y);
         System.out.println(sum);
         System.out.println("-------------------------------------------------------");
+
+
     }
 
     private static List<Fruit> fillFruitsList() {

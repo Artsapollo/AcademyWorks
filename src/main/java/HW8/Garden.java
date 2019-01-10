@@ -8,9 +8,9 @@ public class Garden {
         Animal animal = new Animal("Cat", 3);
         Method[] method = animal.getClass().getDeclaredMethods();
         System.out.println(Arrays.toString(method));
-
         System.out.println();
 
+        //Changing object in private method
         try {
             Method method1 = animal.getClass().getDeclaredMethod("someInternalLogic");
             method1.setAccessible(true);
@@ -19,9 +19,9 @@ public class Garden {
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        System.out.println();
 
-        //Getting a constructor
+
+        //Getting constructor from class
         Constructor[] constructors  = animal.getClass().getConstructors();
         for(Constructor constructor : constructors){
             Class[] paramTypes = constructor.getParameterTypes();
@@ -30,15 +30,19 @@ public class Garden {
             }
             System.out.println();
         }
-        //Created new Animal object from private constructor
+
+        //Created new object from private constructor
         try {
             Class clas = Class.forName(Animal.class.getName());
-            Class[] params = {String.class,int.class};
+            Class[] params = {String.class, int.class};
             animal = (Animal) clas.getConstructor(params).newInstance("Dog", 7);
-        } catch (ClassNotFoundException | InstantiationException |  IllegalAccessException | NoSuchMethodException |InvocationTargetException e){
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
         System.out.println(animal);
-    }
-}
 
+
+    }
+
+
+}

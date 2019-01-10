@@ -11,12 +11,17 @@ public class Fruit implements Serializable {
     private int price;
     private List<Vitamins> vitamins;
 
+
     public Fruit(FruitType fruitType, int dayToLive, LocalDate deliveryDate, int price, List<Vitamins> vitamins) {
         this.fruitType = fruitType;
         this.dayToLive = dayToLive;
         this.deliveryDate = deliveryDate;
         this.price = price;
         this.vitamins = vitamins;
+    }
+
+    public int doingStupid(int price){
+        return this.price = price / 0;
     }
 
     public String getTypeAndPrice(){ return fruitType.toString() + " " + price; }

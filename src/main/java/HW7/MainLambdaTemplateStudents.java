@@ -10,8 +10,14 @@ import static HW7.Vitamins.*;
 public class MainLambdaTemplateStudents {
     public static void main(String[] args) {
         List<Fruit> fruits = fillFruitsList();
-        fruits.forEach(System.out::println);
+//        fruits.forEach(System.out::println);
 
+        //Unchecked Exception
+        try {
+            fruits.stream().map(fruit -> fruit.getPrice() + fruit.doingStupid(3)).forEach(System.out::println);
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
 
         //Deep cloning with serialization
         List<Fruit> cloneFruits = new ArrayList<>();
@@ -36,7 +42,7 @@ public class MainLambdaTemplateStudents {
 
         System.out.println("-------------------------------------------------------");
 
-
+/*
         fruits.stream().filter(fruit -> fruit.getFruitType().equals(PEAR))
                 .forEach(System.out::println);
         System.out.println("-------------------------------------------------------");
@@ -148,8 +154,7 @@ public class MainLambdaTemplateStudents {
                 (x, y) -> x + y);
         System.out.println(sum);
         System.out.println("-------------------------------------------------------");
-
-
+        */
     }
 
     private static List<Fruit> fillFruitsList() {

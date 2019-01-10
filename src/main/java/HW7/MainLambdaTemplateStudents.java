@@ -1,6 +1,7 @@
 package HW7;
 
 import java.io.*;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -10,7 +11,7 @@ import static HW7.Vitamins.*;
 public class MainLambdaTemplateStudents {
     public static void main(String[] args) {
         List<Fruit> fruits = fillFruitsList();
-//        fruits.forEach(System.out::println);
+    //       fruits.forEach(System.out::println);
 
         //Unchecked Exception
         try {
@@ -18,6 +19,15 @@ public class MainLambdaTemplateStudents {
         } catch (ArithmeticException e) {
             e.printStackTrace();
         }
+        System.out.println("-------------------------------------------------------");
+
+        //Checked Exception
+        try {
+            Method method = fruits.getClass().getDeclaredMethod("fruitsTransportation");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        System.out.println("-------------------------------------------------------");
 
         //Deep cloning with serialization
         List<Fruit> cloneFruits = new ArrayList<>();

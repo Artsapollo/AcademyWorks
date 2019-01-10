@@ -24,6 +24,7 @@ public class Fruit implements Serializable {
         return this.price = price / 0;
     }
 
+
     public String getTypeAndPrice(){ return fruitType.toString() + " " + price; }
 
     public FruitType getFruitType() {

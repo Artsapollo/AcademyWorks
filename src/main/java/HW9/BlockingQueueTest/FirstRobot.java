@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class FirstRobot implements Runnable {
 
-    protected BlockingQueue example;
+    private BlockingQueue example;
 
     public FirstRobot(BlockingQueue example) {
         this.example = example;

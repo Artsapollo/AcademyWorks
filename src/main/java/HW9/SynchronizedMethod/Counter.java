@@ -1,7 +1,7 @@
 package HW9.SynchronizedMethod;
 
 public class Counter {
-    synchronized public void getCounter() {
+     public synchronized void getCounter() {
         for (int i = 0; i < 5; i++) {
             System.out.println(i);
             try {

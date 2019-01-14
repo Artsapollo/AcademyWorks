@@ -1,7 +1,7 @@
 package HW9.SynchronizedMethod;
 
 public class Starter extends Thread {
-    Counter counter;
+    private Counter counter;
 
     Starter(Counter counter) {
         this.counter = counter;

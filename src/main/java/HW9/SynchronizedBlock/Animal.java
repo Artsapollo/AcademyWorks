@@ -7,7 +7,7 @@ public class Animal {
     public int count = 0;
 
     public void animalName(String wallaby, List<String> list) {
-        synchronized (this) {
+        synchronized (Animal.class) {
             name = wallaby;
             count++;
         }

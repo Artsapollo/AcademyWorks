@@ -12,9 +12,10 @@ public class SecondRobot implements Runnable {
 
     public void run() {
         try {
-            System.out.println(example.take());
-            System.out.println(example.take());
-            System.out.println(example.take());
+            for(int i = 0; i < 3; i++) {
+                System.out.println(example.take());
+            }
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

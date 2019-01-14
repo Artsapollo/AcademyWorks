@@ -5,7 +5,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class ExampleQueue {
     public static void main(String[] args) {
-        BlockingQueue queue = new ArrayBlockingQueue(1024);
+        BlockingQueue queue = new ArrayBlockingQueue(3);
 
         FirstRobot robot1 = new FirstRobot(queue);
         SecondRobot robot2 = new SecondRobot(queue);

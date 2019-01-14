@@ -12,11 +12,10 @@ public class FirstRobot implements Runnable {
 
     public void run() {
         try {
-            example.put("1");
-            Thread.sleep(1000);
-            example.put("2");
-            Thread.sleep(1000);
-            example.put("3");
+            for(int i = 1; i < 4; i++){
+                example.put(i);
+                Thread.sleep(1000);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

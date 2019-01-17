@@ -2,18 +2,18 @@ package CallableTesting;
 
 import java.util.concurrent.Callable;
 
-public class ThreadTest implements Callable<String> {
+public class MyCallable implements Callable<String> {
 
     private Resource resource;
     private String name;
 
-    public ThreadTest(Resource resource, String name) {
+    public MyCallable(Resource resource, String name) {
         this.resource = resource;
         this.name = name;
     }
 
     @Override
-    public String call() throws Exception{
+    public String call() throws InterruptedException{
         System.out.println(name + " waiting");
         for(int i = 0; i < 5; i++){
             resource.increment();

@@ -7,10 +7,9 @@ public class MainCallable {
         ExecutorService executorService = Executors.newFixedThreadPool(1);
         Resource resource = new Resource(0);
 
-        Callable<String> callable1 = new ThreadTest(resource, "Thread1");
-        Callable<String> callable2 = new ThreadTest(resource, "Thread2");
-        Callable<String> callable3 = new ThreadTest(resource, "Thread3");
-
+        Callable<String> callable1 = new MyCallable(resource, "Thread1");
+        Callable<String> callable2 = new MyCallable(resource, "Thread2");
+        Callable<String> callable3 = new MyCallable(resource, "Thread3");
 
         Future<String> future = executorService.submit(callable1);
         Future<String> future2 = executorService.submit(callable2);

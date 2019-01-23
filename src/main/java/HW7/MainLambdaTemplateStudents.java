@@ -1,218 +1,133 @@
 package HW7;
 
-import java.io.*;
-import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.*;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.stream.*;
 
-import static HW7.FruitType.*;
 import static HW7.Vitamins.*;
+import static HW7.FruitType.*;
+
 
 public class MainLambdaTemplateStudents {
     public static void main(String[] args) {
         List<Fruit> fruits = fillFruitsList();
-    //       fruits.forEach(System.out::println);
-
-        //Unchecked Exception
-        try {
-            fruits.stream().map(fruit -> fruit.getPrice() + fruit.doingStupid(3)).forEach(System.out::println);
-        } catch (ArithmeticException e) {
-            e.printStackTrace();
-        }
-        System.out.println("-------------------------------------------------------");
-
-        //Checked Exception
-        try {
-            Method method = fruits.getClass().getDeclaredMethod("fruitsTransportation");
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        System.out.println("-------------------------------------------------------");
-
-        //Deep cloning with serialization
-        List<Fruit> cloneFruits = new ArrayList<>();
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream ous = new ObjectOutputStream(baos);
-
-            ous.writeObject(fruits);
-            ous.close();
-
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream ois = new ObjectInputStream(bais);
-
-            cloneFruits = (List) ois.readObject();
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        fruits.forEach(System.out::println);
-        System.out.println();
-        cloneFruits.forEach(System.out::println);
-
-        System.out.println("-------------------------------------------------------");
-
-/*
-=======
         fruits.forEach(System.out::println);
 
->>>>>>> origin/master
-        fruits.stream().filter(fruit -> fruit.getFruitType().equals(PEAR))
-                .forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
+        System.out.println("Conveyor methods");
+        System.out.println("filter");
+        fruits.stream().filter(fruit -> FruitType.PEAR.equals(fruit.getFruitType())).forEach(System.out::println);
 
+        System.out.println("skip 4 first");
         fruits.stream().skip(4).forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
 
+        System.out.println("distinct");
         fruits.stream().distinct().forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
 
-        fruits.stream().map(fruit -> fruit.getFruitType() + " " + fruit.getPrice())
-                .forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
+        System.out.println("map");
+        fruits.stream().map(s -> s.getFruitType() + " " + s.getPrice()).forEach(System.out::println);
+        System.out.println("map2");
+        fruits.stream().map(s -> {return s.getPrice() + " " + s.getFruitType();}).forEach(System.out::println);
+        System.out.println("map3");
+        fruits.stream().map(Fruit::getFruitType).forEach(System.out::println);
+        System.out.println("map4");
+        fruits.stream().map(Fruit::getTypeAndPrice).forEach(System.out::println);
 
-        fruits.stream().map(Fruit::getTypeAndPrice)
-                .forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
+        System.out.println("peek");
+        fruits.stream().peek(p -> System.out.println("peek peek" + p)).map(Fruit::getTypeAndPrice).forEach(System.out::println);
 
-        fruits.stream().peek(Fruit -> System.out.println("TAP"))
-                .map(Fruit::getTypeAndPrice)
-                .forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
-
+        System.out.println("limit");
         fruits.stream().limit(4).forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
 
-        Comparator<Fruit> comparator = new Comparator<Fruit>() {
-            @Override
-            public int compare(Fruit o1, Fruit o2) {
-                int r = o1.getFruitType().toString().compareTo(o2.getFruitType().toString());
-                if (r != 0) {
-                    return r;
-                } else {
-                    return o1.getPrice() - o2.getPrice();
-                }
-            }
-        };
-        fruits.stream().sorted(comparator).forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
+        System.out.println("sorted");
+        fruits.stream().sorted(new MyComparator()).forEach(System.out::println);
 
-        fruits.stream().mapToInt(fruit -> fruit.getPrice())
-                .forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
+        System.out.println("mapToInt");
+        fruits.stream().mapToInt(Fruit::getPrice).forEach(System.out::println);
 
+        System.out.println("flatMapToInt");
+        fruits.stream().flatMapToInt(m -> IntStream.of(m.getPrice())).forEach(System.out::println);
 
-        fruits.stream().flatMap(fruit -> fruit.getVitamins().stream())
-                .forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
+        System.out.println("Terminal methods_________");
+        System.out.println("findFirst");
+        System.out.println(fruits.stream().findFirst().orElse(new Fruit(FruitType.APPLE, 30, LocalDate.of(2019,1,4), 12, null)));
 
-        Optional<Fruit> opt = fruits.stream().findFirst();
-        if (opt.isPresent()) {
-            System.out.println(opt.get());
-        } else {
-            System.out.println("no value");
+        System.out.println("findAny");
+        System.out.println(fruits.stream().findAny().orElseThrow(RuntimeException::new));
+
+        System.out.println("collect");
+        System.out.println(fruits.stream().sorted(new MyComparator()).collect(Collectors.toList()));
+
+        System.out.println("count");
+        System.out.println(fruits.stream().filter(s -> FruitType.APPLE.equals(s.getFruitType())).count());
+
+        System.out.println("anyMatch");
+        System.out.println(fruits.stream().anyMatch(s -> FruitType.ORANGE.equals(s.getFruitType())));
+
+        System.out.println("noneMatch");
+        System.out.println(fruits.stream().noneMatch(new Object()::equals));
+
+        System.out.println("allMatch");
+        System.out.println(fruits.stream().allMatch(s -> s.getVitamins().equals(null)));
+
+        System.out.println("min");
+        System.out.println(fruits.stream().min(new MyComparator()));
+
+        System.out.println("max");
+        System.out.println(fruits.stream().max(new MyComparator()));
+
+        System.out.println("forEach");
+        fruits.stream().forEach(s -> s.setPrice(s.getPrice() * 2));
+        System.out.println(fruits.toString());
+
+        System.out.println("forEachOrdered");
+        fruits.stream().forEachOrdered(s -> s.setPrice(s.getPrice() / 2));
+        System.out.println(fruits.toString());
+
+        System.out.println("toArray");
+        FruitType[] fruitTypeArr = fruits.stream().map(Fruit::getFruitType).toArray(FruitType[]::new);
+        for (FruitType i : fruitTypeArr){
+            System.out.println(i);
         }
-        System.out.println("-------------------------------------------------------");
 
-        Optional<Fruit> opt1 = fruits.stream().findAny();
-        if (opt1.isPresent()) {
-            System.out.println(opt1.get());
-        } else {
-            System.out.println("no value");
-        }
-        System.out.println("-------------------------------------------------------");
-
-        long l = fruits.stream().count();
-        System.out.println(l + " fruits in list");
-        System.out.println("-------------------------------------------------------");
-
-        boolean boom = fruits.stream().anyMatch(fruit -> fruit.getFruitType().equals(APPLE));
-        System.out.println(boom);
-        System.out.println("-------------------------------------------------------");
-
-        boolean boom2 = fruits.stream().noneMatch(fruit -> fruit.getFruitType().equals("Banjo"));
-        System.out.println(boom2);
-        System.out.println("-------------------------------------------------------");
-
-        boolean boom3 = fruits.stream()
-                .allMatch(fruit -> fruit.getDayToLive() > 3);
-        System.out.println(boom3);
-        System.out.println("-------------------------------------------------------");
-
-        Optional<Fruit> min = fruits.stream().min(Comparator.comparing(Fruit::getDayToLive));
-        System.out.println(min);
-        System.out.println("-------------------------------------------------------");
-
-        Optional<Fruit> max = fruits.stream().max(Comparator.comparing(Fruit::getDayToLive));
-        System.out.println(max);
-        System.out.println("-------------------------------------------------------");
-
-        fruits.stream().forEach(fruit -> System.out.println(fruit.getFruitType()));
-        System.out.println("-------------------------------------------------------");
-
-        fruits.stream().forEachOrdered(fruit -> System.out.println(fruit.getPrice()));
-        System.out.println("-------------------------------------------------------");
-
-        String[] arr = fruits.stream().map(Fruit::getTypeAndPrice).toArray(String[]::new);
-        for (String far : arr) {
-            System.out.println(far);
-        }
-        System.out.println("-------------------------------------------------------");
-
-        int sum = fruits.stream().reduce(0, (x, y) -> {
-                    if (y.getPrice() < 30)
-                        return x + y.getPrice();
-                    else
-                        return x;
-                },
-                (x, y) -> x + y);
-        System.out.println(sum);
-        System.out.println("-------------------------------------------------------");
-<<<<<<< HEAD
-        */
-=======
->>>>>>> origin/master
+        System.out.println("reduce");
+        System.out.println(fruits.stream().map(Fruit::getPrice).reduce(0, (s1, s2) -> s1 + s2));
     }
 
     private static List<Fruit> fillFruitsList() {
         List<Fruit> fruits = new ArrayList<>();
 
         Fruit fruit = new Fruit(APPLE, 30, LocalDate.of(2019, 1, 4), 12, null);
-        fruit.setVitamins(Arrays.asList(new Vitamins[]{B, C}));
+        fruit.setVitamins(Arrays.asList(new Vitamins[] { B, C }));
         fruits.add(fruit);
 
         fruit = new Fruit(STRAWBERRY, 15, LocalDate.of(2019, 1, 2), 50, null);
-        fruit.setVitamins(Arrays.asList(new Vitamins[]{A, C}));
+        fruit.setVitamins(Arrays.asList(new Vitamins[] { A, C }));
         fruits.add(fruit);
 
         fruit = new Fruit(PEAR, 30, LocalDate.of(2019, 1, 4), 40, null);
-        fruit.setVitamins(Arrays.asList(new Vitamins[]{A, B1, B2, C}));
+        fruit.setVitamins(Arrays.asList(new Vitamins[] { A, B1, B2, C }));
         fruits.add(fruit);
 
         fruit = new Fruit(ORANGE, 60, LocalDate.of(2019, 1, 3), 30, null);
-        fruit.setVitamins(Arrays.asList(new Vitamins[]{E, B, A}));
+        fruit.setVitamins(Arrays.asList(new Vitamins[] { E, B, A }));
         fruits.add(fruit);
 
         fruit = new Fruit(STRAWBERRY, 25, LocalDate.of(2019, 1, 2), 60, null);
-        fruit.setVitamins(Arrays.asList(new Vitamins[]{A, C, D}));
+        fruit.setVitamins(Arrays.asList(new Vitamins[] { A, C, D }));
         fruits.add(fruit);
 
         fruit = new Fruit(PEAR, 15, LocalDate.of(2019, 1, 4), 40, null);
-        fruit.setVitamins(Arrays.asList(new Vitamins[]{A, B, B1, B2, P}));
+        fruit.setVitamins(Arrays.asList(new Vitamins[] { A, B, B1, B2, P }));
         fruits.add(fruit);
 
         fruit = new Fruit(PEAR, 5, LocalDate.of(2019, 1, 6), 10, null);
-        fruit.setVitamins(Arrays.asList(new Vitamins[]{B1, B2, P}));
+        fruit.setVitamins(Arrays.asList(new Vitamins[] { B1, B2, P }));
         fruits.add(fruit);
 
         fruit = new Fruit(APPLE, 30, LocalDate.of(2019, 1, 4), 12, null);
-        fruit.setVitamins(Arrays.asList(new Vitamins[]{B, C}));
+        fruit.setVitamins(Arrays.asList(new Vitamins[] { B, C }));
         fruits.add(fruit);
 
         return fruits;
     }
-
 }

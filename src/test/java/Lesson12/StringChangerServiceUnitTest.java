@@ -27,8 +27,8 @@ public class StringChangerServiceUnitTest {
         doReturn("lowervalue").when(lowerUpperService).toLower(Mockito.anyString());
         doReturn("CAT").when(lowerUpperService).toUpper(Mockito.anyString());
         String expected = "CATlowervalue";
-        String actueal = stringChangerService.addStartUpperInputLower("cat", "input");
-        assertEquals(expected, actueal);
+        String actual = stringChangerService.addStartUpperInputLower("cat", "input");
+        assertEquals(expected, actual);
     }
 
     @Test

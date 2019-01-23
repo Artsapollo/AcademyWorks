@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Fruit implements Serializable {
+import java.time.LocalDate;
+import java.util.List;
+
+public class Fruit {
     private FruitType fruitType;
     private int dayToLive;
     private LocalDate deliveryDate;

@@ -4,6 +4,9 @@ import java.io.*;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.*;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.function.Predicate;
 
 import static HW7.FruitType.*;
 import static HW7.Vitamins.*;
@@ -53,6 +56,10 @@ public class MainLambdaTemplateStudents {
         System.out.println("-------------------------------------------------------");
 
 /*
+=======
+        fruits.forEach(System.out::println);
+
+>>>>>>> origin/master
         fruits.stream().filter(fruit -> fruit.getFruitType().equals(PEAR))
                 .forEach(System.out::println);
         System.out.println("-------------------------------------------------------");
@@ -164,7 +171,10 @@ public class MainLambdaTemplateStudents {
                 (x, y) -> x + y);
         System.out.println(sum);
         System.out.println("-------------------------------------------------------");
+<<<<<<< HEAD
         */
+=======
+>>>>>>> origin/master
     }
 
     private static List<Fruit> fillFruitsList() {

@@ -22,6 +22,7 @@ public class Animal {
 
     private Animal() {
         name = "Unknown";
+
         old = -1;
     }
 

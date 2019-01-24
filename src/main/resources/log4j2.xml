@@ -2,7 +2,7 @@
 <xml status="WARN" monitorInterval="30">
     <Properties>
         <Property name="LOG_PATTERN">
-            %-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) -- %m%n
+            [%p] | %d{DATE} | %c %M - %m%n
         </Property>
     </Properties>
     <Appenders>
@@ -37,7 +37,7 @@
     </Appenders>
     <Loggers>
 
-        <AsyncLogger name="error-logger" level="ERROR">
+        <AsyncLogger name="Logger-Error" level="ERROR">
             <AppenderRef ref="FEMAIL"/>
         </AsyncLogger>
 

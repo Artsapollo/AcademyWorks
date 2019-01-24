@@ -34,20 +34,23 @@ public class FruitShopMockSpyTest {
         when(appleMock.getFruitType()).thenReturn(FruitType.APPLE);
         when(appleMock.getDayToLive()).thenReturn(30);
         when(appleMock.getDeliveryDate()).thenReturn(LocalDate.of(2019, 1, 10));
+        when(appleMock.clone()).thenReturn(appleMock);
 
         when(orangeMock.getFruitType()).thenReturn(FruitType.ORANGE);
         when(orangeMock.getDayToLive()).thenReturn(20);
         when(orangeMock.getDeliveryDate()).thenReturn(LocalDate.of(2019, 1, 15));
+        when(orangeMock.clone()).thenReturn(orangeMock);
 
         when(pearMock.getFruitType()).thenReturn(FruitType.PEAR);
         when(pearMock.getDayToLive()).thenReturn(10);
         when(pearMock.getDeliveryDate()).thenReturn(LocalDate.of(2019, 1, 20));
+        when(pearMock.clone()).thenReturn(pearMock);
 
         doReturn(Arrays.asList(appleMock, orangeMock, pearMock)).when(fruitShop).getFruits();
     }
 
 
-    @Test(expected = NullPointerException.class)
+    @Test //returning null. WHY?
     public void testAllFresh() {
         List<Fruit> expected = Arrays.asList(appleMock);
         List<Fruit> actual = fruitShop.allFresh(LocalDate.of(2019, 1, 15));
@@ -77,10 +80,10 @@ public class FruitShopMockSpyTest {
         verify(pearMock, times(1)).getDayToLive();
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test //return NullPointerException
     public void testAllFreshAndFruitType() {
         List<Fruit> expected = Arrays.asList(pearMock);
-        List<Fruit> actual = fruitShop.allFreshAndFruitType(FruitType.PEAR, LocalDate.of(2019, 1, 15));
+        List<Fruit> actual = fruitShop.allFreshAndFruitType(FruitType.PEAR, LocalDate.of(2019, 1, 25));
         assertEquals(expected, actual);
     }
 

@@ -1,6 +1,12 @@
 package HW11;
 
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FruitShopUnitTest {
-    private FruitShop fruitShop;
+    private static FruitShop fruitShop;
     private static Fruit apple;
     private static Fruit strawberry;
     private static Fruit pear;
@@ -64,7 +70,7 @@ public class FruitShopUnitTest {
     }
 
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testReturnsNull() {
         List<Vitamins> actual = apple.getVitamins();
         System.out.println(actual);
@@ -79,7 +85,7 @@ public class FruitShopUnitTest {
     }
 
     @Test
-    public void testAtLeast9DaysLivingFruits() {
+    public void testAtLeastDaysLivingFruits() {
         List<Fruit> expect = new ArrayList<>();
         expect.add(apple);
         expect.add(strawberry);
@@ -90,7 +96,7 @@ public class FruitShopUnitTest {
     }
 
     @Test
-    public void test30DaysLivingFruit() {
+    public void testDaysLivingFruit() {
         List<Fruit> ex = new ArrayList<>();
         ex.add(orange);
         List<Fruit> actual = fruitShop.checkByExpireDate(30);

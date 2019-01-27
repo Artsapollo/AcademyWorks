@@ -64,7 +64,7 @@ public class StringChangerServiceUnitTest {
 //    }
     @Test
     public void testAddStartAndEndTotalLower() {
-        String actual = stringChangerService.addStartAndEndTotalLower("aAa", "end", "bBb");
+        stringChangerService.addStartAndEndTotalLower("aAa", "end", "bBb");
         verify(lowerUpperService).toLower(Mockito.anyString());
     }
 }

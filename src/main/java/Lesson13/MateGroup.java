@@ -17,10 +17,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
 @XmlRootElement(namespace = "MateGroup", name = "MateAcademy")
-@XmlAccessorType(XmlAccessType.FIELD)
 @JsonPropertyOrder({"room", "teacher", "students", "humanResources", "courier"})
 public class MateGroup implements Serializable {
-
     @XmlElement(type = Teacher.class)
     private Person teacher;
 
@@ -110,6 +108,7 @@ public class MateGroup implements Serializable {
     }
 
     public static MateGroup mateGroupExampleCreator() {
+        System.setProperty("javax.xml.bind.context.factory", "org.eclipse.persistence.jaxb.JAXBContextFactory");
         MateGroup mateGroup = new MateGroup();
         mateGroup.setId(18122018);
 

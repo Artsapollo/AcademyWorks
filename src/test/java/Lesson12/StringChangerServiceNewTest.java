@@ -1,5 +1,6 @@
 package Lesson12;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -8,7 +9,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
+import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,24 +35,23 @@ public class StringChangerServiceNewTest {
 
 
     @Test
-    public void addStartAndEndUpperTest() {
-        when(stringLowerUpperService.toUpper(Mockito.anyString())).thenReturn("END");
-        String expected = "startmiddleEND";
-        String actual = stringChangerService.addStartAndEndUpper("start", "end", "middle");
+    public void testAddStartUpperInputLower() {
+        when(stringLowerUpperService.toLower(Mockito.anyString())).thenReturn("lowervalue");
+        when(stringLowerUpperService.toUpper("cat")).thenReturn("CAT");
+        String expected = "CATlowervalue";
+        String actual = stringChangerService.addStartUpperInputLower("cat", "input");
         assertEquals(expected, actual);
     }
-
 
     @Test
-    public void addStartUpperInputLowerReverse() {
-        when(stringLowerUpperService.toLower(Mockito.anyString())).thenReturn("UPPER");
-        when(stringLowerUpperService.toUpper(Mockito.anyString())).thenReturn("lower");
-        String expected = "lowerUPPER";
-        String actual = stringChangerService.addStartUpperInputLower("UpPeR", "LoWeR");
-        assertEquals(expected, actual);
+    public void testAddStartAndEndTotalLower() {
+        when(stringLowerUpperService.toLower(Mockito.anyString())).thenReturn("Start", "Input");
+        String expected = "Start";
+        String actual = stringChangerService.addStartAndEndTotalLower("Start", "End", "Input");
+        Assert.assertEquals(expected, actual);
     }
 
-
+//spy
     @Test
     public void addStartAndEndTest() {
         doReturn("startend").when(stringChangerService).addStart(Mockito.anyString(), Mockito.anyString());
@@ -63,22 +63,28 @@ public class StringChangerServiceNewTest {
 
 
     @Test
-    public void addStartAndEndUpperTestSpy() {
-        doReturn("startinput").when(stringChangerService).addStart(Mockito.anyString(), Mockito.anyString());
-        when(stringLowerUpperService.toUpper("end")).thenReturn("END");
-        String expected = "startinputEND";
-        String actual = stringChangerService.addStartAndEndUpper("start", "end", "upper");
+    public void testAddStartUpperInputLowerSpy() {
+        doReturn("lowervalue").when(stringLowerUpperService).toLower(Mockito.anyString());
+        doReturn("CAT").when(stringLowerUpperService).toUpper(Mockito.anyString());
+        String expected = "CATlowervalue";
+        String actual = stringChangerService.addStartUpperInputLower("cat", "input");
         assertEquals(expected, actual);
-        verify(stringLowerUpperService).toUpper("end");
     }
 
     @Test
-    public void addStartAndEndTotalLowerTest() {
-        doReturn(stringChangerService.addStart("start", "input") + "end").when(stringLowerUpperService).toLower(Mockito.anyString());
-        String expected = "startinputend";
-        String actual = stringChangerService.addStartAndEndTotalLower("start", "end", "input");
+    public void testAddStartAndEndSpy() {
+        String expected = "aabbEnd";
+        doReturn("aabb").when(stringChangerService).addStart("aa", "bb");
+        String actual = stringChangerService.addStartAndEnd("aa", "End", "bb");
         assertEquals(expected, actual);
-        verify(stringLowerUpperService).toLower("startinputend");
     }
 
+    @Test
+    public void testAddStartAndEndUpperSpy() {
+        String expected = "aaabbbEND";
+        doReturn("aaabbb").when(stringChangerService).addStart("aaa", "bbb");
+        doReturn("END").when(stringLowerUpperService).toUpper("end");
+        String anctual = stringChangerService.addStartAndEndUpper("aaa", "end", "bbb");
+        assertEquals(expected, anctual);
+    }
 }

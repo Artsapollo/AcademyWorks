@@ -1,0 +1,51 @@
+{
+   "id" : 18122018,
+   "teacher" : {
+      "type" : "teacher",
+      "surname" : "Pasko",
+      "yearOfBorn" : 1988,
+      "name" : "Serhii",
+      "salary" : 666
+   },
+   "students" : {
+      "student" : [ {
+         "type" : "student",
+         "name" : "Iza",
+         "yearOfBorn" : 1997
+      }, {
+         "type" : "student",
+         "name" : "Abram",
+         "yearOfBorn" : 1998
+      }, {
+         "type" : "student",
+         "name" : "Moisha",
+         "yearOfBorn" : 1990
+      } ]
+   },
+   "room" : {
+      "city" : "Kyiv",
+      "street" : "Tarasivska",
+      "house" : 16,
+      "number" : 28
+   },
+   "hrs" : {
+      "humanResource" : [ {
+         "name" : "Karmen",
+         "surname" : "",
+         "yearOfBorn" : 1990,
+         "startWorkYear" : 2015
+      }, {
+         "name" : "Efiria",
+         "surname" : "",
+         "yearOfBorn" : 1989,
+         "startWorkYear" : 2016
+      } ]
+   },
+   "courier" : {
+      "tips" : 50,
+      "type" : "courier",
+      "name" : "Pablo",
+      "surname" : "Skoropadskuy",
+      "yearOfBorn" : 1988
+   }
+}

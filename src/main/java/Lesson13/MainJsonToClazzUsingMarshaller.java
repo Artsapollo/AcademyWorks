@@ -10,14 +10,15 @@ import javax.xml.transform.stream.StreamSource;
 
 public class MainJsonToClazzUsingMarshaller {
     public static void main(String[] args) {
+        System.setProperty("javax.xml.bind.context.factory", "org.eclipse.persistence.jaxb.JAXBContextFactory");
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(MateGroup.class);
 
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            unmarshaller.setProperty(UnmarshallerProperties.MEDIA_TYPE, "application/json");
-            unmarshaller.setProperty(UnmarshallerProperties.JSON_INCLUDE_ROOT, false);
-            StreamSource json = new StreamSource("src/main/resources/mateGroupUsingMarshaller.json");
-            MateGroup mateGroup = unmarshaller.unmarshal(json, MateGroup.class).getValue();
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            jaxbUnmarshaller.setProperty(UnmarshallerProperties.MEDIA_TYPE, "application/json");
+            jaxbUnmarshaller.setProperty(UnmarshallerProperties.JSON_INCLUDE_ROOT, false);
+            StreamSource json = new StreamSource("src/main/resources/MateGroupUsingMarshaller.json");
+            MateGroup mateGroup = jaxbUnmarshaller.unmarshal(json, MateGroup.class).getValue();
 
             System.out.println(mateGroup);
 

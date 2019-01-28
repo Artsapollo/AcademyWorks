@@ -1,6 +1,8 @@
 package Lesson13;
 
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * @author spasko
  */
@@ -25,6 +27,7 @@ public class HumanResource extends Person {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return "HumanResource [startWorkYear=" + startWorkYear + ", " + super.toString() + "]";
     }

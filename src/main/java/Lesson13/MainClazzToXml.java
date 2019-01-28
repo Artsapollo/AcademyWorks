@@ -15,7 +15,7 @@ public class MainClazzToXml {
         MateGroup mateGroup = MateGroup.mateGroupExampleCreator();
 
         try {
-            File file = new File("src/main/java/lesson13/mateGroup.xml");
+            File file = new File("src/main/resources/MateGroup.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(MateGroup.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 

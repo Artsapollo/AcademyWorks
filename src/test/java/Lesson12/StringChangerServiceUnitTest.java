@@ -2,6 +2,7 @@ package Lesson12;
 
 import static junit.framework.TestCase.assertEquals;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,8 +23,23 @@ public class StringChangerServiceUnitTest {
 
     @Test
     public void testAddStartUpperInputLower() {
-//        when(lowerUpperService.toLower(Mockito.anyString())).thenReturn("lowervalue");
-//        when(lowerUpperService.toUpper("cat")).thenReturn("CAT");
+        when(lowerUpperService.toLower(Mockito.anyString())).thenReturn("lowervalue");
+        when(lowerUpperService.toUpper("cat")).thenReturn("CAT");
+        String expected = "CATlowervalue";
+        String actual = stringChangerService.addStartUpperInputLower("cat", "input");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAddStartAndEndTotalLower() {
+        when(lowerUpperService.toLower(Mockito.anyString())).thenReturn("Start", "Input");
+        String expected = "Start";
+        String actual = stringChangerService.addStartAndEndTotalLower("Start", "End", "Input");
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAddStartUpperInputLowerSpy() {
         doReturn("lowervalue").when(lowerUpperService).toLower(Mockito.anyString());
         doReturn("CAT").when(lowerUpperService).toUpper(Mockito.anyString());
         String expected = "CATlowervalue";
@@ -32,7 +48,7 @@ public class StringChangerServiceUnitTest {
     }
 
     @Test
-    public void testAddStartAndEnd() {
+    public void testAddStartAndEndSpy() {
         String expected = "aabbEnd";
         doReturn("aabb").when(stringChangerService).addStart("aa", "bb");
         String actual = stringChangerService.addStartAndEnd("aa", "End", "bb");
@@ -40,7 +56,7 @@ public class StringChangerServiceUnitTest {
     }
 
     @Test
-    public void testAddStartAndEndUpper() {
+    public void testAddStartAndEndUpperSpy() {
         String expected = "aaabbbEND";
         doReturn("aaabbb").when(stringChangerService).addStart("aaa", "bbb");
         doReturn("END").when(lowerUpperService).toUpper("end");
@@ -48,22 +64,8 @@ public class StringChangerServiceUnitTest {
         assertEquals(expected, anctual);
     }
 
-    //    @Test
-//    public void testAddStartAndEndTotalLower(){
-//        doReturn("aAaCHANGEDbBbCHANGED").when(stringChangerService).addStart("aAa", "bBb");
-//        String actual = stringChangerService.addStartAndEndTotalLower("aAa", "end", "bBb");
-//        verify(lowerUpperService).toLower("aAaCHANGEDbBbCHANGEDend");
-//
-//    }
-//
-//        @Test
-//    public void testAddStartAndEndTotalLower(){
-//        String actual = stringChangerService.addStartAndEndTotalLower("aAa", "end", "bBb");
-//        verify(lowerUpperService).toLower("aAabBbend");
-//
-//    }
     @Test
-    public void testAddStartAndEndTotalLower() {
+    public void testAddStartAndEndTotalLowerSpy() {
         stringChangerService.addStartAndEndTotalLower("aAa", "end", "bBb");
         verify(lowerUpperService).toLower(Mockito.anyString());
     }

@@ -1,5 +1,8 @@
 package Lesson13;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -32,6 +35,7 @@ public class Teacher extends Person {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return "Teacher [salary=" + salary + " " + super.toString() + "]";
     }

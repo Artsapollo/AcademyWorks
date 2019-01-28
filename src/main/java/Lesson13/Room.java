@@ -1,5 +1,7 @@
 package Lesson13;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -36,6 +38,7 @@ public class Room implements Serializable {
         this.city = city;
     }
 
+@JsonValue
     public String getStreet() {
         return street;
     }

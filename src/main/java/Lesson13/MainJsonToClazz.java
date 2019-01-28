@@ -14,7 +14,7 @@ public class MainJsonToClazz {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            MateGroup mateGroup = mapper.readValue(new File("src/main/java/lesson13/mateGroup.json"),
+            MateGroup mateGroup = mapper.readValue(new File("src/main/resources/mateGroup.json"),
                     MateGroup.class);
             System.out.println(mateGroup);
 

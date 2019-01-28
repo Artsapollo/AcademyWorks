@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * @author spasko
@@ -15,6 +16,7 @@ public class Student extends Person {
     @Override
     @XmlTransient
     @JsonIgnore
+    @JsonValue
     public String getSurname() {
         return super.getSurname();
     }

@@ -12,19 +12,16 @@ import com.fasterxml.jackson.databind.ObjectWriter;
  */
 public class MainClazzToJson {
     public static void main(String[] args) {
-
         MateGroup mateGroup = MateGroup.mateGroupExampleCreator();
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
 
         try {
-
-            writer.writeValue(new File("src/main/java/lesson13/mateGroup.json"), mateGroup);
-            System.out.println(writer.writeValueAsString(mateGroup));
+            objectWriter.writeValue(new File("src/main/resources/MateGroup.json"), mateGroup);
+            System.out.println(objectWriter.writeValueAsString(mateGroup));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -15,6 +15,10 @@ import javax.ws.rs.core.Response.Status;
 
 import Lesson13.MateGroup;
 import Lesson13.Person;
+import Lesson13.Teacher;
+
+import static javax.ws.rs.core.Response.Status.ACCEPTED;
+import static sun.security.timestamp.TSResponse.BAD_REQUEST;
 
 @Path("/rs/mate")
 public class MateGroupServiceImpl implements MateGroupService {
@@ -29,15 +33,28 @@ public class MateGroupServiceImpl implements MateGroupService {
 
     @Override
     @PUT
-    @Path("/{groupId}")
+    @Path("/{groupId}/Student")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addStudents(@PathParam("groupId") int groupId, Person person) {
         if (groupId == mateGroup.getId()) {
-            mateGroup.getStudents().addAll(Arrays.asList(person));
-            return Response.status(Status.ACCEPTED).entity(mateGroup).type(MediaType.APPLICATION_JSON).build();
+            mateGroup.getTeacher().setYearOfBorn(1984);
+            return Response.status(ACCEPTED).entity(mateGroup).type(MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Status.NOT_FOUND).build();
     }
 
+
+    @PUT
+    @Path("/{groupId}/Teacher")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response changeTeacher(@PathParam("groupId") int groupId, Teacher teacher) {
+        if (teacher == null || groupId != mateGroup.getId()) {
+            return Response.status(BAD_REQUEST).build();
+        }
+        mateGroup.setTeacher(teacher);
+        return Response.status(ACCEPTED).entity(mateGroup).type(MediaType.APPLICATION_JSON).build();
+    }
 }
+

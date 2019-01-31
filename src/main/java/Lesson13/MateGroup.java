@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(namespace = "MateGroup", name = "MateAcademy")
 @JsonPropertyOrder({"room", "teacher", "students", "humanResources", "courier"})
 public class MateGroup implements Serializable {
@@ -106,7 +107,6 @@ public class MateGroup implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
     public static MateGroup mateGroupExampleCreator() {
         System.setProperty("javax.xml.bind.context.factory", "org.eclipse.persistence.jaxb.JAXBContextFactory");
         MateGroup mateGroup = new MateGroup();

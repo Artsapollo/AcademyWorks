@@ -1,4 +1,4 @@
-package Lesson14;
+package Lesson14.SOAP;
 
 import javax.xml.ws.Endpoint;
 

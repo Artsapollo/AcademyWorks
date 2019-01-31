@@ -1,4 +1,4 @@
-package Lesson14;
+package Lesson14.SOAP;
 
 import Lesson13.MateGroup;
 import Lesson13.Person;

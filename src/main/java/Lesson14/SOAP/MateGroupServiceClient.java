@@ -1,8 +1,9 @@
-package Lesson14;
+package Lesson14.SOAP;
 
 import Lesson13.Person;
 import Lesson13.Student;
 import Lesson13.Teacher;
+import Lesson14.SOAP.MateGroupService;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -18,7 +19,7 @@ public class MateGroupServiceClient {
 
         // 1st argument service URI, refer to wsdl document above
         // 2nd argument is service name, refer to wsdl document above
-        QName qname = new QName("http://Lesson14/", "MateGroupServiceImplService");
+        QName qname = new QName("http://Lesson14/SOAP/", "MateGroupServiceImplService");
 
         Service service = Service.create(url, qname);
 

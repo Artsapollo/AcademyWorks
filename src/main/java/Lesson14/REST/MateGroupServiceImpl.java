@@ -24,7 +24,6 @@ import static sun.security.timestamp.TSResponse.BAD_REQUEST;
 public class MateGroupServiceImpl implements MateGroupService {
     private MateGroup mateGroup = MateGroup.mateGroupExampleCreator();
 
-    @Override
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMateGroup() {

@@ -122,8 +122,8 @@ public class MateGroup implements Serializable {
         mateGroup.setRoom(room);
 
         Set<HumanResource> humanResources = new HashSet<>();
-        humanResources.add(new HumanResource("Karmen", "", 1990, 2015));
-        humanResources.add(new HumanResource("Efiria", "", 1989, 2016));
+        humanResources.add(new HumanResource("Karmen", "Stella", 1990, 2015));
+        humanResources.add(new HumanResource("Efiria", "Bella", 1989, 2016));
         mateGroup.setHumanResources(humanResources);
 
         List<Person> students = new ArrayList<>();

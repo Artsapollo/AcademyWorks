@@ -1,5 +1,5 @@
 --ВЫВЕСТИ ИНФУ ПРО ЗАКАЗЧИКОВ КОТОРЫЕ КУПИЛИ ПРОДУКТЫ С БУКВОЙ А В НАЗВАНИИ
-select *
+select distinct *
 from customers c
 inner join orders o on c.cust_num = o.cust
 inner join products p on p.product_id = o.product
@@ -184,4 +184,4 @@ where amount > 250;
 select avg(amount), sum(amount), (100 * avg(amount/credit_limit)), (100 * avg(amount/quota))
 from orders o
 inner join customers c on o.cust = c.cust_num
-inner join salesreps s on o.rep = s.empl_num; 
+inner join salesreps s on o.rep = s.empl_num;

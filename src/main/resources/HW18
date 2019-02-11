@@ -1,3 +1,98 @@
+--Step 33
+
+select count(*), count(sales), count(quota)
+from salesreps;
+
+select sum(sales), sum(quota), (sum(sales) - sum(quota)), (sum(sales - quota))
+from salesreps;
+
+select count(distinct title)
+from salesreps;
+
+select count(distinct rep_office)
+from salesreps
+where sales > quota;
+
+--Step 34
+-- Какова средняя стоимость заказа?
+select avg(amount)
+from orders;
+
+--Какова средняя стоимость заказа для каждого служащего?
+select rep, avg(amount)
+from orders
+group by rep;
+
+--Каков диапазон плановых объемов продаж для каждого офиса?
+select rep_office, min(quota), max(quota)
+from salesreps
+group by rep_office;
+
+-- Сколько служащих работают в каждом офисе?
+select rep_office, count(*)
+from salesreps
+group by rep_office;
+
+--Сколько клиентов обслуживает каждый служащий?
+select count(distinct cust_num), 'customer for salesrep', cust_rep
+from customers
+group by cust_rep;
+
+--Подсчитать общее количество заказов по каждому клиенту для каждого служащего.
+select rep, cust, sum(amount)
+from orders
+group by rep, cust;
+
+--Подсчитать общее количество заказов по каждому клиенту для каждого служащего;
+--Отсортировать результаты запроса по клиентам и служащим.
+select rep, cust, sum(amount)
+from orders
+group by rep, cust
+order by rep, cust;
+
+--Step 35
+--Подсчитать общее количество заказов для каждого служащего.
+select empl_num, name, sum(amount)
+from orders o
+inner join salesreps s on o.rep = s.empl_num
+group by empl_num, name;
+
+--Подсчитать общее количество заказов для каждого служащего.
+select name, sum(amount)
+from orders o
+inner join salesreps s on o.rep = s.empl_num
+group by name;
+
+select hair, eyes, count(*)
+from coloris
+group by hair, eyes;
+
+--Step 36
+--Какова средняя стоимость заказа для каждого служащего из числа тех,
+--у которых общая стоимость заказов превышает $300?
+select rep, avg(amount)
+from orders
+group by rep
+having sum(amount) > 300;
+
+--Для каждого офиса, в котором работают два и более человек,
+--вычислить общий плановый и фактический объем продаж для всех служащих офиса.
+select city, sum(quota), sum(s.sales)
+from offices o
+inner join salesreps s on o.office = s.rep_office
+group by city
+having count(*) >= 2;
+
+--Показать цену, количество на складе и общее количество заказанных единиц для каждого наименования товара,
+--если для него общее количество заказанных единиц превышает 75 процентов от количества товара на складе.
+select description, price, qty_on_hand, sum(qty)
+from products p
+inner join orders o on o.mfr = p.mfr_id
+group by mfr_id, product_id, description, price, qty_on_hand
+having sum(qty) > (0.75 * qty_on_hand)
+order by qty_on_hand desc;
+
+-- Home Tasks
 --1 Скільки яких товірів купляли (скільки штук і чого купили всього)
 select description, sum(qty)
 from orders o

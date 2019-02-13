@@ -28,7 +28,7 @@ public class MateGroupServiceClient {
         System.out.println(hello.getMateGroup());
 
         List<Person> persons = new ArrayList<>();
-        persons.add(new Student("Student", "First", 1995));
+        persons.add(new Student("Student", "ConnectToDB", 1995));
         persons.add(new Teacher("Teacher", "Second", 1990, 666));
         System.out.println(hello.changeTeacher(new Teacher("AnotherTeacher", "Surname", 1984, 1000)));
         System.out.println(hello.addStudent(persons));

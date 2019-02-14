@@ -6,5 +6,5 @@ import java.util.Set;
 public interface OfficeDao {
     Set<Office> getAllOffices() throws SQLException;
 
-    Office getOfficeByCity(String city) throws SQLException;
+    Set<Office> getOfficeByCity(String city) throws SQLException;
 }

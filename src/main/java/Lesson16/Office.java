@@ -1,6 +1,7 @@
 package Lesson16;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Office {
 
@@ -74,6 +75,24 @@ public class Office {
 
     public void setSales(double sales) {
         this.sales = sales;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Office)) return false;
+        Office office1 = (Office) o;
+        return Double.compare(office1.getSales(), getSales()) == 0 &&
+                getOffice().equals(office1.getOffice()) &&
+                getCity().equals(office1.getCity()) &&
+                getRegion().equals(office1.getRegion()) &&
+                getMgr().equals(office1.getMgr()) &&
+                getTarget().equals(office1.getTarget());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getOffice(), getCity(), getRegion(), getMgr(), getTarget(), getSales());
     }
 
     @Override

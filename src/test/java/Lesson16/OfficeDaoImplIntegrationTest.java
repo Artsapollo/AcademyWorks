@@ -19,7 +19,7 @@ public class OfficeDaoImplIntegrationTest {
 
     @Test
     public void testFindOfficeByCity() throws SQLException {
-        Office office = officeDao.getOfficeByCity("Бубурино");
+        Set<Office> office = officeDao.getOfficeByCity("Бубурино");
         System.out.println(office);
         assertNotNull(office);
     }

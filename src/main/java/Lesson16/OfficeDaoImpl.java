@@ -30,20 +30,23 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public Office getOfficeByCity(String city) throws SQLException {
+    public Set<Office> getOfficeByCity(String city) throws SQLException {
+        Set<Office> officeSet = new HashSet<>();
         Connection connection = ConnectToDB.getConnection();
         PreparedStatement pst = connection.prepareStatement("select * from offices where city = ?");
         pst.setString(1, city);
         ResultSet rs = pst.executeQuery();
 
         Office office = null;
-        if (rs.next()) {
+        while (rs.next()) {
             office = new Office(rs.getString("office"), rs.getString("city"), rs.getString("region"),
                     rs.getBigDecimal("mgr"), rs.getBigDecimal("target"), rs.getDouble("sales"));
+
+            officeSet.add(office);
         }
         rs.close();
         pst.close();
         connection.close();
-        return office;
+        return officeSet;
     }
 }

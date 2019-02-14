@@ -7,35 +7,21 @@ import java.util.Set;
 
 public class OrderDaoImpl implements OrderDao {
 
-    @Override
-    public Set<Order> getAllOrders() throws SQLException {
+    public Order findOrderById(BigDecimal id) throws SQLException {
         Connection connection = ConnectToDB.getConnection();
-        Set<Order> orders = new HashSet<>();
+        PreparedStatement stm = connection.prepareStatement("SELECT * FROM orders WHERE order_Num = ?");
+        stm.setBigDecimal(1, id);
+        ResultSet rs = stm.executeQuery();
 
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM  orders");
-        ResultSet rs = stmt.executeQuery();
-        showMetadata(rs);
-
-        while (rs.next()) {
-            Order order = new Order(rs.getBigDecimal("order_Num"), null, rs.getDate("order_Date"), rs.getString("mfr"),
+        Order order = null;
+        if (rs.next()) {
+            order = new Order(rs.getBigDecimal("order_Num"), null, rs.getDate("order_Date"), rs.getString("mfr"),
                     rs.getBigDecimal("qty"), rs.getBigDecimal("amount"));
-
-            stmt = connection.prepareStatement("SELECT * FROM  products WHERE product_id=?");
-            stmt.setString(1, rs.getString("PRODUCT"));
-            ResultSet rsPr = stmt.executeQuery();
-            while (rsPr.next()) {
-                Product product = new Product(rsPr.getString("product_Id"), rsPr.getString("mfr_Id"),
-                        rsPr.getString("description"), rsPr.getBigDecimal("price"), rsPr.getBigDecimal("qty_On_Hand"));
-                order.setProduct(product);
-            }
-            rsPr.close();
-            orders.add(order);
         }
-
         rs.close();
-        stmt.close();
+        stm.close();
         connection.close();
-        return orders;
+        return order;
     }
 
     private void showMetadata(ResultSet rs) throws SQLException {
@@ -50,22 +36,6 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
-    public Order findOrderById(BigDecimal id) throws SQLException {
-        Connection connection = ConnectToDB.getConnection();
-        PreparedStatement stm = connection.prepareStatement("SELECT * FROM orders WHERE order_Num = ?");
-        stm.setBigDecimal(1,id);
-        ResultSet rs = stm.executeQuery();
-
-        Order order = null;
-        if(rs.next()){
-            order = new Order(rs.getBigDecimal("order_Num"), null, rs.getDate("order_Date"), rs.getString("mfr"),
-                    rs.getBigDecimal("qty"), rs.getBigDecimal("amount"));
-        }
-        rs.close();
-        stm.close();
-        connection.close();
-        return order;
-    }
 
     @Override
     public boolean insertOrder(Order order) throws SQLException {

@@ -6,9 +6,9 @@ import java.util.Date;
 public class Order {
 
     private BigDecimal orderNum;
-    private Product product;
     private Date orderDate;
     private String mfr;
+    private Product product;
     private BigDecimal qty;
     private BigDecimal amount;
 

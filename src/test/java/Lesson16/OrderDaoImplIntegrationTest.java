@@ -18,14 +18,14 @@ public class OrderDaoImplIntegrationTest {
 
 
     @Test
-    public void testFindOrderById() throws SQLException{
+    public void testFindOrderById() throws SQLException {
         Order order = orderDao.findOrderById(ALREADY_EXIST_ORDER);
         System.out.println(order);
         assertNotNull(order);
     }
 
     @Test
-    public void testFindOrderByIdNotFound() throws SQLException{
+    public void testFindOrderByIdNotFound() throws SQLException {
         Order order = orderDao.findOrderById(NOT_EXIST_ORDER);
         System.out.println(order);
         assertNull(order);

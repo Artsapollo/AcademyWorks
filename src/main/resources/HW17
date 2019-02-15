@@ -16,17 +16,17 @@ order by order_num;
 --Вывести список всех служащих, включая города и регионы, в которых они работают.
 select empl_num, name, city, region
 from salesreps s
-inner join offices o on s.rep_office = o.office
+inner join office o on s.rep_office = o.office
 order by s.name;
 
 --Вывести список офисов, включая их имена и рапорты
 select city, name, title
-from offices o
+from office o
 inner join salesreps s on o.mgr = s.empl_num;
 
 --Bывести список офисов, включая их имена и рапорты, а так же план продаж, которых превышает $600.00
 select city, name, title, target
-from offices o
+from office o
 inner join salesreps s on o.mgr = s.empl_num and target > 600;
 
 --Bывести список всех заказов, в том числе и их стоимость и описание товаров
@@ -57,7 +57,7 @@ select order_num, amount, company, name, city
 from orders o
 inner join customers c on o.cust = c.cust_num
 inner join salesreps s on c.cust_rep = s.empl_num
-inner join offices off on s.rep_office = off.office and amount > 700
+inner join office off on s.rep_office = off.office and amount > 700
 order by amount;
 
 --STEP 28
@@ -70,23 +70,23 @@ inner join salesreps s on o.order_date = s.hire_date;
 -- Получить все комбинации служащих офисов, где плановый объем продаж служащего больше, чем план какого либо офиса.
 select name, quota, city, target
 from salesreps s
-inner join offices o on s.quota > o.target;
+inner join office o on s.quota > o.target;
 
 --STEP 29
 
 --Показать имя, офис, и объем продаж каждого служащего.
 select name, s.sales, city
 from salesreps s
-inner join offices o on s.rep_office = o.office;
+inner join office o on s.rep_office = o.office;
 
 -- Сообщить всю информацию, о служащих и офисах где они работают.
 select *
 from salesreps s
-inner join offices o on s.rep_office = o.office;
+inner join office o on s.rep_office = o.office;
 
 select s.*, city, region
 from salesreps s
-inner join offices o on s.rep_office = o.office;
+inner join office o on s.rep_office = o.office;
 
 --STEP 30
 
@@ -103,13 +103,13 @@ inner join salesreps m on s.manager = m.empl_num and s.quota > m.quota;
 --Вывести список служащих, которые работают со своими руководителями в различных офисах, включая имена и офисы как служащих, так и руководителей.
 select emps.name, emp_office.city, mgrs.name, mgr_office.city
 from salesreps emps
-inner join offices emp_office on emps.rep_office = emp_office.office
+inner join office emp_office on emps.rep_office = emp_office.office
 inner join salesreps mgrs on emps.manager = mgrs.empl_num
-inner join offices mgr_office on mgrs.rep_office = mgr_office.office and emps.rep_office <> mgrs.rep_office;
+inner join office mgr_office on mgrs.rep_office = mgr_office.office and emps.rep_office <> mgrs.rep_office;
 
 --Показать все возможные комбинации служащих и городов
 select name, city
-from salesreps, offices;
+from salesreps, office;
 
 --STEP 31
 

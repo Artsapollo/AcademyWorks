@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Locale;
 
 public class ConnectToDB {
+
     public static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
     public static final String USER = "MA_STUDENT";
     public static final String PASS = "KOLOBOK";

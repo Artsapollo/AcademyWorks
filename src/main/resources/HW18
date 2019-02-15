@@ -78,7 +78,7 @@ having sum(amount) > 300;
 --Для каждого офиса, в котором работают два и более человек,
 --вычислить общий плановый и фактический объем продаж для всех служащих офиса.
 select city, sum(quota), sum(s.sales)
-from offices o
+from office o
 inner join salesreps s on o.office = s.rep_office
 group by city
 having count(*) >= 2;
@@ -109,14 +109,14 @@ having count(product) > 3;
 --3. Вивести офіси в яких працює більше трьох менеджерів
 select office, city, rep_office
 from (select o.office, o.city, count(rep_office) as rep_office
-from offices o
+from office o
 inner join salesreps s on o.office = s.rep_office
 group by o.office, o.city) count
 where count.rep_office > 3;
 
 --4. Вивести середній вік по офісу
 select rep_office, city, avg(age)
-from offices o
+from office o
 inner join salesreps s on o.office = s.rep_office
 group by rep_office, city;
 

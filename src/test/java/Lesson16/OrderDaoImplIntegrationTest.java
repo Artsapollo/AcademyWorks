@@ -15,7 +15,8 @@ import static org.junit.Assert.assertNull;
 public class OrderDaoImplIntegrationTest {
     private static final BigDecimal NOT_EXIST_ORDER = BigDecimal.valueOf(-1);
     private static final BigDecimal ALREADY_EXIST_ORDER = BigDecimal.valueOf(112961);
-    private static final Order ORDER = new Order(BigDecimal.valueOf(12345), null, new Date(), null, BigDecimal.valueOf(-1), null);
+    private static final Order ORDER = new Order(BigDecimal.valueOf(12345), null, new Date(),
+            null, BigDecimal.valueOf(-1), null);
 
     public OrderDao orderDao = new OrderDaoImpl();
 
@@ -46,6 +47,22 @@ public class OrderDaoImplIntegrationTest {
         Order order = orderDao.findOrderById(NOT_EXIST_ORDER);
         System.out.println(order);
         assertNull(order);
+    }
+
+    @Test
+    public void testInsertOrder() throws SQLException{
+        assertTrue(orderDao.insertOrder(new Order(new BigDecimal(111111), null, null,
+                "AAA", new BigDecimal(906), new BigDecimal(10000))));
+    }
+
+    @Test
+    public void testUpdateOrder() throws SQLException{
+        assertTrue(orderDao.updateOrder(new Order(new BigDecimal(111111), null, null, null, new BigDecimal(505), new BigDecimal(5005))));
+    }
+
+    @Test
+    public void testDeleteOrder() throws SQLException{
+        assertTrue(orderDao.deleteOrder(new BigDecimal(111111)));
     }
 
 }

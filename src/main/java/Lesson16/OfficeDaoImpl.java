@@ -1,5 +1,6 @@
 package Lesson16;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ public class OfficeDaoImpl implements OfficeDao {
         Office office = null;
 
         while (rs.next()) {
-            office = new Office(rs.getString("office"), rs.getString("city"), rs.getString("region"),
+            office = new Office(rs.getBigDecimal("office"), rs.getString("city"), rs.getString("region"),
                     rs.getBigDecimal("mgr"), rs.getBigDecimal("target"), rs.getDouble("sales"));
             officeSet.add(office);
         }
@@ -39,7 +40,7 @@ public class OfficeDaoImpl implements OfficeDao {
 
         Office office = null;
         while (rs.next()) {
-            office = new Office(rs.getString("office"), rs.getString("city"), rs.getString("region"),
+            office = new Office(rs.getBigDecimal("office"), rs.getString("city"), rs.getString("region"),
                     rs.getBigDecimal("mgr"), rs.getBigDecimal("target"), rs.getDouble("sales"));
 
             officeSet.add(office);
@@ -48,5 +49,80 @@ public class OfficeDaoImpl implements OfficeDao {
         pst.close();
         connection.close();
         return officeSet;
+    }
+
+    @Override
+    public boolean insertOffice(Office office) throws SQLException {
+        boolean result = false;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionToDbPool.getConnection();
+            String sql = "insert into offices (office, city, region, target, sales) values (?,?,?,?,?)";
+            statement = connection.prepareStatement(sql);
+            statement.setBigDecimal(1, office.getOffice());
+            statement.setString(2, office.getCity());
+            statement.setString(3, office.getRegion());
+            statement.setBigDecimal(4, office.getTarget());
+            statement.setDouble(5, office.getSales());
+
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                result = true;
+            }
+        } finally {
+            statement.close();
+            connection.close();
+        }
+        return result;
+    }
+
+    @Override
+    public boolean updateOffice(Office office) throws SQLException {
+        boolean result = false;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionToDbPool.getConnection();
+            String sql = "update offices set city = ?, region = ?, sales = ? where office = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, office.getCity());
+            statement.setString(2, office.getRegion());
+            statement.setDouble(3, office.getSales());
+            statement.setBigDecimal(4, office.getOffice());
+
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                result = true;
+            }
+        } finally {
+            statement.close();
+            connection.close();
+        }
+
+        return result;
+
+    }
+
+    @Override
+    public boolean deleteOffice(BigDecimal id) throws SQLException {
+        boolean result = false;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionToDbPool.getConnection();
+            String sql = "delete from offices where office = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setBigDecimal(1, id);
+
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                result = true;
+            }
+        } finally {
+            statement.close();
+            connection.close();
+        }
+        return result;
     }
 }

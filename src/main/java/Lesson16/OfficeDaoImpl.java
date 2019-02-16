@@ -13,7 +13,7 @@ public class OfficeDaoImpl implements OfficeDao {
     @Override
     public Set<Office> getAllOffices() throws SQLException {
         Set<Office> officeSet = new HashSet<>();
-        Connection connection = ConnectToDB.getConnection();
+        Connection connection = ConnectionToDbPool.getConnection();
         PreparedStatement pst = connection.prepareStatement("select * from offices");
         ResultSet rs = pst.executeQuery();
         Office office = null;
@@ -33,7 +33,7 @@ public class OfficeDaoImpl implements OfficeDao {
     @Override
     public Set<Office> getOfficeByCity(String city) throws SQLException {
         Set<Office> officeSet = new HashSet<>();
-        Connection connection = ConnectToDB.getConnection();
+        Connection connection = ConnectionToDbPool.getConnection();
         PreparedStatement pst = connection.prepareStatement("select * from offices where city = ?");
         pst.setString(1, city);
         ResultSet rs = pst.executeQuery();

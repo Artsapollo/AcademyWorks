@@ -1,6 +1,8 @@
 package Lesson16;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -8,6 +10,7 @@ import java.util.Set;
 
 import static junit.framework.TestCase.assertTrue;
 
+@FixMethodOrder(MethodSorters.JVM)
 public class OfficeDaoImplIntegrationTest {
     public OfficeDao officeDao = new OfficeDaoImpl();
 

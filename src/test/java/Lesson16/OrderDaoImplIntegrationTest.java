@@ -57,7 +57,8 @@ public class OrderDaoImplIntegrationTest {
 
     @Test
     public void testUpdateOrder() throws SQLException{
-        assertTrue(orderDao.updateOrder(new Order(new BigDecimal(111111), null, null, null, new BigDecimal(505), new BigDecimal(5005))));
+        assertTrue(orderDao.updateOrder(new Order(new BigDecimal(111111), null, null,
+                null, new BigDecimal(505), new BigDecimal(5005))));
     }
 
     @Test

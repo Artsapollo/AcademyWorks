@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class Office {
 
-    private String office;
+    private BigDecimal office;
     private String city;
     private String region;
     private BigDecimal mgr;
     private BigDecimal target;
-    private double sales;
+    private Double sales;
 
     public Office() {
 
@@ -20,7 +20,7 @@ public class Office {
         this.city = city;
     }
 
-    public Office(String office, String city, String region, BigDecimal mgr, BigDecimal target, double sales) {
+    public Office(BigDecimal office, String city, String region, BigDecimal mgr, BigDecimal target, Double sales) {
         this.office = office;
         this.city = city;
         this.region = region;
@@ -29,11 +29,11 @@ public class Office {
         this.sales = sales;
     }
 
-    public String getOffice() {
+    public BigDecimal getOffice() {
         return office;
     }
 
-    public void setOffice(String office) {
+    public void setOffice(BigDecimal office) {
         this.office = office;
     }
 
@@ -69,11 +69,11 @@ public class Office {
         this.target = target;
     }
 
-    public double getSales() {
+    public Double getSales() {
         return sales;
     }
 
-    public void setSales(double sales) {
+    public void setSales(Double sales) {
         this.sales = sales;
     }
 
@@ -82,12 +82,12 @@ public class Office {
         if (this == o) return true;
         if (!(o instanceof Office)) return false;
         Office office1 = (Office) o;
-        return Double.compare(office1.getSales(), getSales()) == 0 &&
-                getOffice().equals(office1.getOffice()) &&
+        return getOffice().equals(office1.getOffice()) &&
                 getCity().equals(office1.getCity()) &&
                 getRegion().equals(office1.getRegion()) &&
                 getMgr().equals(office1.getMgr()) &&
-                getTarget().equals(office1.getTarget());
+                getTarget().equals(office1.getTarget()) &&
+                getSales().equals(office1.getSales());
     }
 
     @Override

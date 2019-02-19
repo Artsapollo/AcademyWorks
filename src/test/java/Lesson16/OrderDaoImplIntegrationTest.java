@@ -1,6 +1,8 @@
 package Lesson16;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -12,11 +14,12 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
+@FixMethodOrder(MethodSorters.JVM)
 public class OrderDaoImplIntegrationTest {
     private static final BigDecimal NOT_EXIST_ORDER = BigDecimal.valueOf(-1);
     private static final BigDecimal ALREADY_EXIST_ORDER = BigDecimal.valueOf(112961);
-    private static final Order ORDER = new Order(BigDecimal.valueOf(12345), null, new Date(),
-            null, BigDecimal.valueOf(-1), null);
+    private static final Order order = new Order(new BigDecimal(111111), null, null,
+            null, new BigDecimal(505), new BigDecimal(5005));
 
     public OrderDao orderDao = new OrderDaoImpl();
 
@@ -63,7 +66,7 @@ public class OrderDaoImplIntegrationTest {
 
     @Test
     public void testDeleteOrder() throws SQLException{
-        assertTrue(orderDao.deleteOrder(new BigDecimal(111111)));
+        assertTrue(orderDao.deleteOrder(order));
     }
 
 }

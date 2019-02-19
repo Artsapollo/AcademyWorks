@@ -99,77 +99,51 @@ public class OrderDaoImpl implements OrderDao {
     }
 
 
-    @Override
     public boolean insertOrder(Order order) throws SQLException {
-        boolean result = false;
-        Connection connection = null;
-        PreparedStatement statement = null;
-
-        try {
-            connection = ConnectionToDbPool.getConnection();
-            String sql = "insert into orders (order_num, mfr, qty) values (?, ?, ?)";
-            statement = connection.prepareStatement(sql);
-            statement.setBigDecimal(1, order.getOrderNum());
-            statement.setString(2, order.getMfr());
-            statement.setBigDecimal(3, order.getQty());
-
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                result = true;
+        return new CRUDTemplateAbstract<Order>() {
+            @Override
+            public PreparedStatement returnPrepareStatement(Order order, Connection connection) throws SQLException {
+                String SQL = "insert into orders (order_num, mfr, qty) values (?,?,?)";
+                PreparedStatement statement = connection.prepareStatement(SQL);
+                statement.setBigDecimal(1, order.getOrderNum());
+                statement.setString(2, order.getMfr());
+                statement.setBigDecimal(3, order.getQty());
+                return statement;
             }
-        } finally {
-            statement.close();
-            connection.close();
-        }
-        return result;
+        }.templateOperation(order);
     }
 
     @Override
     public boolean updateOrder(Order order) throws SQLException {
-        boolean result = false;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionToDbPool.getConnection();
-            String sql = "UPDATE orders SET qty=?, amount=?  WHERE order_num=?";
-            statement = connection.prepareStatement(sql);
-            statement.setBigDecimal(1, order.getQty());
-            statement.setBigDecimal(2, order.getAmount());
-            statement.setBigDecimal(3, order.getOrderNum());
-            statement.executeUpdate();
-
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                result = true;
+        return new CRUDTemplateAbstract<Order>() {
+            @Override
+            public PreparedStatement returnPrepareStatement(Order order, Connection connection) throws SQLException {
+                String sql = "UPDATE orders SET qty=?, amount=?  WHERE order_num=?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setBigDecimal(1, order.getQty());
+                statement.setBigDecimal(2, order.getAmount());
+                statement.setBigDecimal(3, order.getOrderNum());
+                statement.executeUpdate();
+                return statement;
             }
-        } finally {
-            statement.close();
-            connection.close();
-        }
-
-        return result;
+        }.templateOperation(order);
 
     }
 
     @Override
-    public boolean deleteOrder(BigDecimal id) throws SQLException {
-        boolean result = false;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionToDbPool.getConnection();
-            String sql = "DELETE orders WHERE order_num=?";
-            statement = connection.prepareStatement(sql);
-            statement.setBigDecimal(1, id);
-
-            int rowsDeleted = statement.executeUpdate();
-            if (rowsDeleted > 0) {
-                result = true;
+    public boolean deleteOrder(Order order) throws SQLException {
+        return new CRUDTemplateAbstract<Order>() {
+            @Override
+            public PreparedStatement returnPrepareStatement(Order order, Connection connection) throws SQLException {
+                String sql = "DELETE orders WHERE order_num=?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setBigDecimal(1, order.getOrderNum());
+                return statement;
             }
-        } finally {
-            statement.close();
-            connection.close();
-        }
-        return result;
+        }.templateOperation(order);
     }
+
+
+
 }
+

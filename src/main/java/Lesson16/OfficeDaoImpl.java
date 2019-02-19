@@ -53,76 +53,41 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public boolean insertOffice(Office office) throws SQLException {
-        boolean result = false;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionToDbPool.getConnection();
+        CRUDTemplateInterface<Office> templateInterface = (office1, connection)->{
             String sql = "insert into offices (office, city, region, target, sales) values (?,?,?,?,?)";
-            statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setBigDecimal(1, office.getOffice());
             statement.setString(2, office.getCity());
             statement.setString(3, office.getRegion());
             statement.setBigDecimal(4, office.getTarget());
             statement.setDouble(5, office.getSales());
-
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                result = true;
-            }
-        } finally {
-            statement.close();
-            connection.close();
-        }
-        return result;
+            return statement;
+        };
+        return templateInterface.templateOperation(office);
     }
 
     @Override
     public boolean updateOffice(Office office) throws SQLException {
-        boolean result = false;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionToDbPool.getConnection();
+        CRUDTemplateInterface<Office> templateInterface = (office1, connection) -> {
             String sql = "update offices set city = ?, region = ?, sales = ? where office = ?";
-            statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, office.getCity());
             statement.setString(2, office.getRegion());
             statement.setDouble(3, office.getSales());
             statement.setBigDecimal(4, office.getOffice());
-
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                result = true;
-            }
-        } finally {
-            statement.close();
-            connection.close();
-        }
-
-        return result;
-
+            return statement;
+        };
+        return templateInterface.templateOperation(office);
     }
 
     @Override
-    public boolean deleteOffice(BigDecimal id) throws SQLException {
-        boolean result = false;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionToDbPool.getConnection();
+    public boolean deleteOffice(Office office) throws SQLException {
+        CRUDTemplateInterface<Office> templateInterface = (office1, connection)-> {
             String sql = "delete from offices where office = ?";
-            statement = connection.prepareStatement(sql);
-            statement.setBigDecimal(1, id);
-
-            int rowsDeleted = statement.executeUpdate();
-            if (rowsDeleted > 0) {
-                result = true;
-            }
-        } finally {
-            statement.close();
-            connection.close();
-        }
-        return result;
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setBigDecimal(1, office.getOffice());
+            return statement;
+        };
+        return templateInterface.templateOperation(office);
     }
 }

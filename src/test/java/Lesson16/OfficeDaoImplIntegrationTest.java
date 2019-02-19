@@ -13,6 +13,8 @@ import static junit.framework.TestCase.assertTrue;
 @FixMethodOrder(MethodSorters.JVM)
 public class OfficeDaoImplIntegrationTest {
     public OfficeDao officeDao = new OfficeDaoImpl();
+    private static final Office office = new Office(new BigDecimal(440), "Киев", "Центр", null,
+            new BigDecimal(333), 44.258);
 
     @Test
     public void getAllOffices() throws SQLException {
@@ -42,6 +44,6 @@ public class OfficeDaoImplIntegrationTest {
 
     @Test
     public void testDeleteOffice() throws SQLException {
-        assertTrue(officeDao.deleteOffice(new BigDecimal(440)));
+        assertTrue(officeDao.deleteOffice(office));
     }
 }

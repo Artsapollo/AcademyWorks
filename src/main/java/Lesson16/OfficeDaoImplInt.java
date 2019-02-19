@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Set;
 
-public class OfficeDaoImplInterface implements OfficeDao{
+public class OfficeDaoImplInt implements OfficeDao{
 
     @Override
     public boolean insertOffice(Office office) throws SQLException {

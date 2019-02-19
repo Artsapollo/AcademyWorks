@@ -10,8 +10,9 @@ import java.sql.SQLException;
 import static junit.framework.TestCase.assertTrue;
 
 @FixMethodOrder(MethodSorters.JVM)
-public class OfficeDaoImplInterfaceIntegrationTest {
-    public OfficeDao officeDao = new OfficeDaoImpl();
+public class OfficeDaoAbstractIntegrationTest {
+    private OfficeDaoImplAbs officeDao = new OfficeDaoImplAbs();
+
     private static final Office office = new Office(new BigDecimal(440), "Киев", "Центр", null,
             new BigDecimal(333), 44.258);
 
@@ -31,5 +32,4 @@ public class OfficeDaoImplInterfaceIntegrationTest {
     public void testDeleteOffice() throws SQLException {
         assertTrue(officeDao.deleteOffice(office));
     }
-
 }

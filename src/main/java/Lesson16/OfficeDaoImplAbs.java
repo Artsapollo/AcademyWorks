@@ -3,8 +3,19 @@ package Lesson16;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Set;
 
-public class OfficeDaoImplAbs implements OfficeDao {
+public  class OfficeDaoImplAbs implements OfficeDao {
+
+    @Override
+    public Set<Office> getAllOffices() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Set<Office> getOfficeByCity(String city) throws SQLException {
+        return null;
+    }
 
     @Override
     public boolean insertOffice(Office office) throws SQLException {

@@ -7,6 +7,16 @@ import java.util.Set;
 public class OfficeDaoImplInt implements OfficeDao{
 
     @Override
+    public Set<Office> getAllOffices() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Set<Office> getOfficeByCity(String city) throws SQLException {
+        return null;
+    }
+
+    @Override
     public boolean insertOffice(Office office) throws SQLException {
         CRUDTemplateInterface<Office> templateInterface = (office1, connection)->{
             String sql = "insert into offices (office, city, region, target, sales) values (?,?,?,?,?)";

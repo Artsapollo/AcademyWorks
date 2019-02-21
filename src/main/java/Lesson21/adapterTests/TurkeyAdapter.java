@@ -7,10 +7,12 @@ public class TurkeyAdapter extends Duck{
         this.turkey = turkey;
     }
 
+    @Override
     public void quack(){
         turkey.gobble();
     }
 
+    @Override
     public void fly(){
         turkey.fly();
     }

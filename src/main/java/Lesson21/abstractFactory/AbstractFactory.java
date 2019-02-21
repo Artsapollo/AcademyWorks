@@ -1,20 +1,8 @@
 package Lesson21.abstractFactory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class AbstractFactory {
-    public static void main (String [] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String country = reader.readLine();
-        InterAbsFactory iaf = null;
-
-        if(country.equals("UA")){
-            iaf = new UaCarPrice();
-        } else if (country.equals("RU")){
-            iaf = new RuCarPrice();
-        }
+    public static void main(String[] args) {
+        InterAbsFactory iaf = FactoryProducer.getFactory("UA");
 
         Porshe porshe = iaf.getPorshe();
         System.out.println(porshe.getText());

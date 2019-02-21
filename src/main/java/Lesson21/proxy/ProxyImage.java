@@ -8,7 +8,9 @@ public class ProxyImage implements Image {
         this.file = file;
     }
 
+    @Override
     public void display() {
+        System.out.println("Through the proxy");
         if (image == null) {
             image = new RealImage(file);
         }

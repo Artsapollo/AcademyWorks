@@ -3,9 +3,10 @@ package Lesson21.decorator;
 public class Decorator {
     public static void main(String[] args) {
         Car sportCar = new SportCar();
-        Car blueUnknownCar = new BlueCarDecorator(new UnknownCar());
+        Car muscleCarDecorator = new MuscleCarDecorator(new OldCar());
+
         sportCar.draw();
         System.out.println();
-        blueUnknownCar.draw();
+        muscleCarDecorator.draw();
     }
 }

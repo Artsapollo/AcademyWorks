@@ -9,11 +9,12 @@ public class RealImage implements Image {
     }
 
     public void load(String file) {
-        System.out.println("Downloading..." + file);
+        System.out.println("Downloading " + file);
     }
 
+    @Override
     public void display() {
-        System.out.println("Review " + file);
+        System.out.println("Showing " + file);
     }
 
 }

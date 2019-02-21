@@ -13,15 +13,15 @@ public class AdapterTest {
         System.out.println();
 
         System.out.println("Mr.Duck says ");
-        testDuck(duck);
+        duckImpl(duck);
 
         System.out.println();
 
         System.out.println("Mr.Turkey Adapter says ");
-        testDuck(turkeyAdapter);
+        duckImpl(turkeyAdapter);
 
     }
-    static void testDuck(Duck duck){
+    static void duckImpl(Duck duck){
         duck.quack();
         duck.fly();
     }

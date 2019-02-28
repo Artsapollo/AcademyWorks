@@ -1,9 +1,6 @@
 package lesson22;
 
-import dbTables.Customers;
-import dbTables.Offices;
-import dbTables.Products;
-import dbTables.Salesreps;
+import dbTables.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,66 +22,25 @@ public class TablesInfo {
     private static EntityManager entityManager = factory.createEntityManager();
 
 
-    public static void productInfo(String productId) {
-        LOG.debug("product info");
-        try {
-            System.out.println(entityManager.find(Products.class, productId));
-            LOG.debug("successful");
-        } catch (RuntimeException e) {
-            LOG.error("failed", e);
-            throw e;
-        }
-    }
-
-    public static void orderInfo(BigDecimal orderNum) {
+    public static Orders orderInfo(BigDecimal id) {
         LOG.debug("order info");
+        Orders orders;
         try {
-            System.out.println(entityManager.find(OrderModel.class, orderNum));
+            orders = entityManager.find(Orders.class, id);
+            System.out.println(orders);
+            System.out.println(orders.getProduct());
+            System.out.println(orders.getCustomers());
+            System.out.println(orders.getSalesreps().getRepOffice());
+            System.out.println(orders.getSalesreps());
             LOG.debug("successful");
         } catch (RuntimeException e) {
             LOG.error("failed", e);
             throw e;
         }
-    }
-
-    public static void customerInfo(BigDecimal custNum) {
-        LOG.debug("customer info");
-        try {
-            System.out.println(entityManager.find(Customers.class, custNum));
-            LOG.debug("successful");
-        } catch (RuntimeException e) {
-            LOG.error("failed", e);
-            throw e;
-        }
-    }
-
-    public static void officeInfo(BigDecimal office) {
-        LOG.debug("office info");
-        try {
-            System.out.println(entityManager.find(Offices.class, office));
-            LOG.debug("successful");
-        } catch (RuntimeException e) {
-            LOG.error("failed", e);
-            throw e;
-        }
-    }
-
-    public static void salesrepsInfo(BigDecimal emplNum) {
-        LOG.debug("salesreps info");
-        try {
-            System.out.println(entityManager.find(Salesreps.class, emplNum));
-            LOG.debug("successful");
-        } catch (RuntimeException e) {
-            LOG.error("failed", e);
-            throw e;
-        }
+        return orders;
     }
 
     public static void main(String[] args) {
-        TablesInfo.productInfo("41033");
         TablesInfo.orderInfo(BigDecimal.valueOf(112961));
-        TablesInfo.customerInfo(BigDecimal.valueOf(2102));
-        TablesInfo.officeInfo(BigDecimal.valueOf(11));
-        TablesInfo.salesrepsInfo(BigDecimal.valueOf(103));
     }
 }

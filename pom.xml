@@ -55,55 +55,59 @@
         </plugins>
     </build>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
+
+        <!--Testing-->
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+
+        <!-- log4j -->
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.11.1</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
+
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
             <version>3.4.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.6.1</version>
         </dependency>
+
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>smtp</artifactId>
             <version>1.6.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+
+        <!--jackson-->
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.9.8</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/eclipselink -->
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-            <version>2.7.4</version>
-        </dependency>
 
         <dependency>
             <groupId>javax.json</groupId>
@@ -116,31 +120,109 @@
             <artifactId>javax.json</artifactId>
             <version>1.1</version>
         </dependency>
+
         <!-- SOAP/WEBService -->
+
         <dependency>
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>
             <version>2.3.1</version>
         </dependency>
+
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>rt</artifactId>
             <version>2.3.1</version>
         </dependency>
+
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-grizzly</artifactId>
             <version>1.19.4</version>
         </dependency>
+
         <dependency>
             <groupId>com.sun.grizzly</groupId>
             <artifactId>grizzly-servlet-webserver</artifactId>
             <version>1.9.65</version>
         </dependency>
+
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-json</artifactId>
             <version>1.19.4</version>
         </dependency>
+
+        <!-- HTTP -->
+
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>1.4.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.3.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.oracle</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/ojdbc8.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.1</version>
+        </dependency>
+
+        <!-- JPA -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.7.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.persistence</groupId>
+                    <artifactId>javax.persistence</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>5.4.1.Final</version>
+        </dependency>
+
+
     </dependencies>
 </project>

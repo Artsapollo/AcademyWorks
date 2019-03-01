@@ -1,7 +1,5 @@
 package dbTables;
 
-import Lesson16.Office;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;

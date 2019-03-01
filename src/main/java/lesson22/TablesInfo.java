@@ -1,6 +1,5 @@
 package lesson22;
 
-import dbTables.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,30 +21,16 @@ public class TablesInfo {
     private static EntityManager entityManager = factory.createEntityManager();
 
 
-    public static Orders orderInfo(BigDecimal id) {
-        LOG.debug("order info");
-        Orders orders;
-        try {
-            orders = entityManager.find(Orders.class, id);
-            System.out.println(orders);
-            System.out.println(orders.getProducts());
-            System.out.println(orders.getCustomers());
-            System.out.println(orders.getSalesreps().getRepOffice());
-            System.out.println(orders.getSalesreps());
-            LOG.debug("successful");
-        } catch (RuntimeException e) {
-            LOG.error("failed", e);
-            throw e;
-        }
-        return orders;
-    }
-
-    public static OrderModel getAllOrders(BigDecimal id) {
+    public static OrderModel orderInfo(BigDecimal id) {
         LOG.debug("order info");
         OrderModel orderModel;
         try {
             orderModel = entityManager.find(OrderModel.class, id);
-            System.out.println(orderModel.getOrderNum());
+            System.out.println(orderModel);
+            System.out.println(orderModel.getProducts());
+            System.out.println(orderModel.getCustomers());
+            System.out.println(orderModel.getSalesreps().getRepOffice());
+            System.out.println(orderModel.getSalesreps());
             LOG.debug("successful");
         } catch (RuntimeException e) {
             LOG.error("failed", e);
@@ -54,8 +39,8 @@ public class TablesInfo {
         return orderModel;
     }
 
+
     public static void main(String[] args) {
-//        TablesInfo.orderInfo(BigDecimal.valueOf(112961));
-        TablesInfo.getAllOrders(BigDecimal.valueOf(112961));
+        TablesInfo.orderInfo(BigDecimal.valueOf(112961));
     }
 }

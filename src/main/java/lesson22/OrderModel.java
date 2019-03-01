@@ -1,6 +1,8 @@
 package lesson22;
 
+import dbTables.Customers;
 import dbTables.Products;
+import dbTables.Salesreps;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -14,9 +16,11 @@ public class OrderModel implements java.io.Serializable {
     private BigDecimal orderNum;
     private Date orderDate;
     private String mfr;
-    private Products product;
+    private Products products;
     private BigDecimal qty;
     private BigDecimal amount;
+    private Customers customers;
+    private Salesreps salesreps;
 
     public OrderModel() {
     }
@@ -29,7 +33,7 @@ public class OrderModel implements java.io.Serializable {
         this.orderNum = orderNum;
         this.orderDate = orderDate;
         this.mfr = mfr;
-        this.product = product;
+        this.products = product;
         this.qty = qty;
         this.amount = amount;
     }
@@ -63,14 +67,14 @@ public class OrderModel implements java.io.Serializable {
         this.mfr = mfr;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Products.class)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PRODUCT")
-    public Products getProduct() {
-        return product;
+    public Products getProducts() {
+        return products;
     }
 
-    public void setProduct(Products product) {
-        this.product = product;
+    public void setProducts(Products products) {
+        this.products = products;
     }
 
     @Column(name = "QTY")
@@ -91,15 +95,35 @@ public class OrderModel implements java.io.Serializable {
         this.amount = amount;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CUST")
+    public Customers getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Customers customers) {
+        this.customers = customers;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "REP")
+    public Salesreps getSalesreps() {
+        return salesreps;
+    }
+
+    public void setSalesreps(Salesreps salesreps) {
+        this.salesreps = salesreps;
+    }
+
     @Override
     public String toString() {
-        return "OrderModel{" +
-                "orderNum=" + orderNum +
-                ", orderDate=" + orderDate +
-                ", mfr='" + mfr + '\'' +
-                ", product='" + product + '\'' +
-                ", qty=" + qty +
-                ", amount=" + amount +
+        return "Orders{ " +
+                " orderNum= " + orderNum +
+                ", orderDate= " + orderDate +
+                ", mfr= '" + mfr + '\'' +
+                ", products= " + products.getProductId() +
+                ", qty= " + qty +
+                ", amount= " + amount +
                 '}';
     }
 }

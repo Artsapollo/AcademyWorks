@@ -31,7 +31,7 @@ public class Offices implements java.io.Serializable {
     }
 
     @Id
-    @OneToMany(fetch = FetchType.EAGER)
+//    @OneToMany(fetch = FetchType.EAGER)
     @Column(name = "OFFICE")
     public BigDecimal getOffice() {
         return office;
@@ -88,13 +88,13 @@ public class Offices implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "Offices{" +
-                "office=" + office +
-                ", city='" + city + '\'' +
-                ", region='" + region + '\'' +
-                ", mgr=" + mgr +
-                ", target=" + target +
-                ", sales=" + sales +
+        return "Offices{ " +
+                " office= " + office +
+                ", city= '" + city + '\'' +
+                ", region= '" + region + '\'' +
+                ", mgr= " + mgr +
+                ", target= " + target +
+                ", sales= " + sales +
                 '}';
     }
 }

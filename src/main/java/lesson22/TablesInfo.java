@@ -28,7 +28,7 @@ public class TablesInfo {
         try {
             orders = entityManager.find(Orders.class, id);
             System.out.println(orders);
-            System.out.println(orders.getProduct());
+            System.out.println(orders.getProducts());
             System.out.println(orders.getCustomers());
             System.out.println(orders.getSalesreps().getRepOffice());
             System.out.println(orders.getSalesreps());
@@ -40,7 +40,22 @@ public class TablesInfo {
         return orders;
     }
 
+    public static OrderModel getAllOrders(BigDecimal id) {
+        LOG.debug("order info");
+        OrderModel orderModel;
+        try {
+            orderModel = entityManager.find(OrderModel.class, id);
+            System.out.println(orderModel.getOrderNum());
+            LOG.debug("successful");
+        } catch (RuntimeException e) {
+            LOG.error("failed", e);
+            throw e;
+        }
+        return orderModel;
+    }
+
     public static void main(String[] args) {
-        TablesInfo.orderInfo(BigDecimal.valueOf(112961));
+//        TablesInfo.orderInfo(BigDecimal.valueOf(112961));
+        TablesInfo.getAllOrders(BigDecimal.valueOf(112961));
     }
 }

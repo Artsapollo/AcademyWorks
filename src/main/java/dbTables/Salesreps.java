@@ -64,7 +64,7 @@ public class Salesreps implements java.io.Serializable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @Column(name = "REP_OFFICE")
+    @JoinColumn(name = "REP_OFFICE")
     public Offices getRepOffice() {
         return repOffice;
     }
@@ -121,16 +121,16 @@ public class Salesreps implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "Salesreps{" +
-                "emplNum=" + emplNum +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", repOffice=" + repOffice +
-                ", title='" + title + '\'' +
-                ", hireDate=" + hireDate +
-                ", manager=" + manager +
-                ", quota=" + quota +
-                ", sales=" + sales +
+        return "Salesreps{ " +
+                " emplNum= " + emplNum +
+                ", name= '" + name + '\'' +
+                ", age= " + age +
+                ", repOffice= " + repOffice.getOffice() +
+                ", title= '" + title + '\'' +
+                ", hireDate= " + hireDate +
+                ", manager= " + manager +
+                ", quota= " + quota +
+                ", sales= " + sales +
                 '}';
     }
 }

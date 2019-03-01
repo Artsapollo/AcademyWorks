@@ -41,7 +41,7 @@ public class Customers implements java.io.Serializable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @Column(name = "CUST_REP")
+    @JoinColumn(name = "CUST_REP")
     public Salesreps getCustRep() {
         return custRep;
     }
@@ -61,11 +61,11 @@ public class Customers implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "Customers{" +
-                "custNum=" + custNum +
-                ", company='" + company + '\'' +
-                ", custRep=" + custRep +
-                ", creditLimit=" + creditLimit +
+        return "Customers{ " +
+                " custNum= " + custNum +
+                ", company= '" + company + '\'' +
+                ", custRep= " + custRep.getEmplNum() +
+                ", creditLimit= " + creditLimit +
                 '}';
     }
 }

@@ -78,7 +78,7 @@ public class Products implements java.io.Serializable {
         this.qtyOnHand = qtyOnHand;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "products") //Один продукт может находится во многих оредра//mappedBy - чтобы связь была двусторонней
     public Set<OrderModel> getOrdersSet() {
         return ordersSet;
     }
@@ -87,5 +87,15 @@ public class Products implements java.io.Serializable {
         this.ordersSet = ordersSet;
     }
 
-
+    @Override
+    public String toString() {
+        return "Products{ " +
+                " productId= '" + productId + '\'' +
+                ", mfrId= '" + mfrId + '\'' +
+                ", description= '" + description + '\'' +
+                ", price= " + price +
+                ", qtyOnHand= " + qtyOnHand +
+                ", ordersSet= " + ordersSet +
+                '}';
+    }
 }

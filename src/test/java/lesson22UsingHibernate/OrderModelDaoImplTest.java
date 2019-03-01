@@ -1,4 +1,4 @@
-package lesson22;
+package lesson22UsingHibernate;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -16,17 +16,6 @@ public class OrderModelDaoImplTest {
 
     private OrderModelDao orderModelDao = new OrderModelDaoImpl();
 
-//    @Test
-//    public void getAllOrders(){
-//        assertNotNull(orderModelDao.getAllOrders());
-//    }
-
-    @Test
-    public void findOrderById(){
-        OrderModel tutu = orderModelDao.findOrderModelById(new BigDecimal(112961));
-        assertNotNull(tutu);
-    }
-
     @Test
     public void insertOrder() {
         assertTrue(orderModelDao.insertOrderModel(orderModel));
@@ -41,5 +30,16 @@ public class OrderModelDaoImplTest {
     @Test
     public void testDeleteOrder() {
         assertTrue(orderModelDao.deleteOrderModel(new BigDecimal(111111)));
+    }
+
+    @Test
+    public void getAllOrders() {
+        assertNotNull(orderModelDao.getAllOrders());
+    }
+
+    @Test
+    public void findOrderById() {
+        OrderModel tutu = orderModelDao.findOrderModelById(new BigDecimal(112961));
+        assertNotNull(tutu);
     }
 }

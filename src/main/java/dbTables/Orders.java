@@ -1,17 +1,12 @@
-package lesson22;
-
-import dbTables.Customers;
-import dbTables.Products;
-import dbTables.Salesreps;
+package dbTables;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name = "ORDERS", schema = "MA_STUDENT")
-public class OrderModel implements java.io.Serializable {
+public class Orders implements java.io.Serializable {
 
     private BigDecimal orderNum;
     private Date orderDate;
@@ -22,14 +17,14 @@ public class OrderModel implements java.io.Serializable {
     private Customers customers;
     private Salesreps salesreps;
 
-    public OrderModel() {
+    public Orders() {
     }
 
-    public OrderModel(BigDecimal orderNum) {
+    public Orders(BigDecimal orderNum) {
         this.orderNum = orderNum;
     }
 
-    public OrderModel(BigDecimal orderNum, Date orderDate, String mfr, Products product, BigDecimal qty, BigDecimal amount) {
+    public Orders(BigDecimal orderNum, Date orderDate, String mfr, Products product, BigDecimal qty, BigDecimal amount) {
         this.orderNum = orderNum;
         this.orderDate = orderDate;
         this.mfr = mfr;
@@ -121,7 +116,7 @@ public class OrderModel implements java.io.Serializable {
                 " orderNum= " + orderNum +
                 ", orderDate= " + orderDate +
                 ", mfr= '" + mfr + '\'' +
-                ", products= " + products.getProductId() +
+                ", products= " + products +
                 ", qty= " + qty +
                 ", amount= " + amount +
                 '}';

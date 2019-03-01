@@ -80,7 +80,7 @@
             <version>2.11.1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
+        <!-- disruptor -->
 
         <dependency>
             <groupId>com.lmax</groupId>
@@ -190,7 +190,7 @@
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
-            <version>0.9.5.1</version>
+            <version>[0.9.5.3,)</version>
         </dependency>
 
         <!-- JPA -->

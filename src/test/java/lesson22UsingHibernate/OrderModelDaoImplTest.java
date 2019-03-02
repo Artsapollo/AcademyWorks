@@ -28,19 +28,21 @@ public class OrderModelDaoImplTest {
     }
 
     @Test
-    public void insertOrder() {
-        assertTrue(orderModelDao.insertOrderModel(orderModel));
+    public void insertOrderModel(){
+        assertTrue(orderModelDao.
+                insertOrderModel(orderModel));
     }
 
     @Test
-    public void testUpdateOrder() {
-        assertTrue(orderModelDao.updateOrderModel(new OrderModel(new BigDecimal(111111), null, null,
-                null, new BigDecimal(101), new BigDecimal(1001))));
+    public void updateOrderModel(){
+        assertTrue(orderModelDao.updateOrderModel(new OrderModel(new BigDecimal(111111),null,
+                null,null,new BigDecimal(101),new BigDecimal(1001))));
     }
 
     @Test
-    public void testDeleteOrder() {
-        assertTrue(orderModelDao.deleteOrderModel(new BigDecimal(111111)));
+    public void deleteOrderModel(){
+        assertTrue(orderModelDao.
+                deleteOrderModel(new BigDecimal(111111)));
     }
 
 

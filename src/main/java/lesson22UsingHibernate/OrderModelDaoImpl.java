@@ -53,10 +53,6 @@ public class OrderModelDaoImpl implements OrderModelDao {
             sessionObj.beginTransaction();
             orderModel = new HashSet<>(sessionObj.createQuery("FROM OrderModel").list());
         } catch (Exception sqlException) {
-            if (null != sessionObj.getTransaction()) {
-                LOG.info("\n...Transaction failed...");
-                sessionObj.getTransaction().rollback();
-            }
             sqlException.printStackTrace();
         } finally {
             if (sessionObj != null) {
@@ -143,7 +139,7 @@ public class OrderModelDaoImpl implements OrderModelDao {
             sessionObj = buildSessionFactory().openSession();
             sessionObj.beginTransaction();
 
-            sessionObj.delete(sessionObj.get(OrderModel.class, id));
+            sessionObj.delete(sessionObj.find(OrderModel.class, id));
 
             sessionObj.getTransaction().commit();
             result = true;

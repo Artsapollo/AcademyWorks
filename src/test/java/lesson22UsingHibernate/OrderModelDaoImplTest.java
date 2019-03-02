@@ -15,9 +15,12 @@ public class OrderModelDaoImplTest {
             null, new BigDecimal(505), new BigDecimal(5005));
 
     private OrderModelDao orderModelDao = new OrderModelDaoImpl();
-
     @Test
-    public void insertOrder() {
+    public void getAllOrders() {
+        assertNotNull(orderModelDao.getAllOrders());
+    }
+    @Test
+    public void insertOrder(){
         assertTrue(orderModelDao.insertOrderModel(orderModel));
     }
 
@@ -32,10 +35,6 @@ public class OrderModelDaoImplTest {
         assertTrue(orderModelDao.deleteOrderModel(new BigDecimal(111111)));
     }
 
-    @Test
-    public void getAllOrders() {
-        assertNotNull(orderModelDao.getAllOrders());
-    }
 
     @Test
     public void findOrderById() {

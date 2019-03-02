@@ -55,9 +55,7 @@ public class OrderModelDaoImpl implements OrderModelDao {
         } catch (Exception sqlException) {
             sqlException.printStackTrace();
         } finally {
-            if (sessionObj != null) {
                 sessionObj.close();
-            }
         }
         return orderModel;
     }
@@ -75,6 +73,8 @@ public class OrderModelDaoImpl implements OrderModelDao {
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();
+        } finally {
+                sessionObj.close();
         }
         return orderModel;
     }
@@ -96,9 +96,7 @@ public class OrderModelDaoImpl implements OrderModelDao {
             }
             sqlException.printStackTrace();
         } finally {
-            if (sessionObj != null) {
                 sessionObj.close();
-            }
         }
         return result;
     }
@@ -110,10 +108,7 @@ public class OrderModelDaoImpl implements OrderModelDao {
             sessionObj = buildSessionFactory().openSession();
             sessionObj.beginTransaction();
 
-            OrderModel om = sessionObj.get(OrderModel.class, orderModel.getOrderNum());
-            om.setAmount(om.getAmount());
-            om.setQty(om.getQty());
-
+            sessionObj.update(orderModel);
             sessionObj.getTransaction().commit();
             result = true;
             LOG.info("\n....Success....");
@@ -124,9 +119,7 @@ public class OrderModelDaoImpl implements OrderModelDao {
             }
             sqlException.printStackTrace();
         } finally {
-            if (sessionObj != null) {
                 sessionObj.close();
-            }
         }
         return result;
     }
@@ -151,9 +144,7 @@ public class OrderModelDaoImpl implements OrderModelDao {
             }
             sqlException.printStackTrace();
         } finally {
-            if (sessionObj != null) {
                 sessionObj.close();
-            }
         }
         return result;
     }

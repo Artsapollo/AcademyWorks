@@ -1,4 +1,4 @@
-package lesson22;
+package lesson22UsingHibernate;
 
 import java.math.BigDecimal;
 import java.util.Set;

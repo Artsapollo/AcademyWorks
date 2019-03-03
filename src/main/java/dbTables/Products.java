@@ -1,6 +1,6 @@
 package dbTables;
 
-import lesson22.OrderModel;
+import lesson22UsingHibernate.OrderModel;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

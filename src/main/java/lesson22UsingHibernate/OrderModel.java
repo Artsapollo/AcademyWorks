@@ -1,4 +1,4 @@
-package lesson22;
+package lesson22UsingHibernate;
 
 import dbTables.Customers;
 import dbTables.Products;

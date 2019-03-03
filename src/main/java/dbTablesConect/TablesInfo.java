@@ -1,5 +1,7 @@
-package lesson22;
+package dbTablesConect;
 
+import lesson22UsingHibernate.OrderModel;
+import lesson22UsingHibernate.OrderModelDaoImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

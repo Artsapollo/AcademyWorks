@@ -16,8 +16,9 @@ public class GarageAppConfig {
     }
 
     @Bean("Evo")
+    @Primary
     public Evo returnEvo(){
-        return new Evo();
+        return new Evo("Yellow");
     }
 
     @Bean("Gtr")
@@ -34,4 +35,5 @@ public class GarageAppConfig {
     public Supra returnSupra(){
         return new Supra();
     }
+
 }

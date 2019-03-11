@@ -17,7 +17,7 @@ public class GarageByConfig {
         Gtr gtr = context.getBean("Gtr", Gtr.class);
         System.out.println(gtr);
 
-        Car car = context.getBean( Car.class);
+        Car car = context.getBean("Nsx", Car.class);
         System.out.println(car);
 
         Supra supra = context.getBean("Supra", Supra.class);

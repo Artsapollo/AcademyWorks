@@ -7,9 +7,7 @@ public abstract class Garage implements Car{
     }
 
     @Override
-    public String getColor() {
-        return this.getColor();
-    }
+    public abstract String getColor();
 
     @Override
     public String toString() {

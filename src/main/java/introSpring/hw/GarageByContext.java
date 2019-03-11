@@ -11,6 +11,7 @@ public class GarageByContext {
         System.out.println(carrera);
 
         Evo evo = (Evo) context.getBean("Evo");
+        evo.setColor("Black");
         System.out.println(evo);
 
         Gtr gtr = context.getBean("Gtr", Gtr.class);

@@ -1,9 +1,6 @@
 package introSpring.configPack;
 
-import introSpring.AbstractAnimal;
-import introSpring.Cat;
-import introSpring.Dog;
-import introSpring.Mouse;
+import introSpring.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

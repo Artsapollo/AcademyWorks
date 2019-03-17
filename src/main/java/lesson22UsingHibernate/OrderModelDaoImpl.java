@@ -1,7 +1,7 @@
 package lesson22UsingHibernate;
 
 
-import dbTables.*;
+import lesson16.entity.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -30,10 +30,10 @@ public class OrderModelDaoImpl implements OrderModelDao {
         // Creating Configuration Instance & Passing Hibernate Configuration File
         Configuration configObj = new Configuration();
         configObj.addAnnotatedClass(OrderModel.class);
-        configObj.addAnnotatedClass(Customers.class);
-        configObj.addAnnotatedClass(Offices.class);
-        configObj.addAnnotatedClass(Products.class);
-        configObj.addAnnotatedClass(Salesreps.class);
+        configObj.addAnnotatedClass(Customer.class);
+        configObj.addAnnotatedClass(Office.class);
+        configObj.addAnnotatedClass(Product.class);
+        configObj.addAnnotatedClass(Salesrep.class);
         configObj.configure(new File("src\\main\\resources\\lesson24\\hibernate.cfg.xml"));
 
         // Since Hibernate Version 4.x, ServiceRegistry Is Being Used

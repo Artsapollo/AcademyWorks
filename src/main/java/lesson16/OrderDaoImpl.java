@@ -1,5 +1,7 @@
 package lesson16;
 
+import lesson16.entity.Order;
+
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Set;
@@ -23,7 +25,7 @@ public class OrderDaoImpl implements OrderDao {
 //            stmt.setString(1, rs.getString("PRODUCT"));
 //            ResultSet rsPr = stmt.executeQuery();
 //            while (rsPr.next()) {
-//                Products product = new Products(rsPr.getString("product_Id"),
+//                Product product = new Product(rsPr.getString("product_Id"),
 //                        rsPr.getString("mfr_Id"),
 //                        rsPr.getString("description"),
 //                        rsPr.getBigDecimal("price"),
@@ -49,7 +51,7 @@ public class OrderDaoImpl implements OrderDao {
 //        ResultSet resultSet = statement.executeQuery();
 //
 //        while (resultSet.next()) {
-//            Products product = new Products(resultSet.getString("MFR_ID"), resultSet.getString("PRODUCT_ID"),
+//            Product product = new Product(resultSet.getString("MFR_ID"), resultSet.getString("PRODUCT_ID"),
 //                    resultSet.getString("DESCRIPTION"), resultSet.getBigDecimal("PRICE"),
 //                    resultSet.getBigDecimal("QTY_ON_HAND"));
 //
@@ -72,20 +74,20 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     public Order findOrderById(BigDecimal id) throws SQLException {
-        Connection connection = ConnectionToDbPool.getConnection();
-        PreparedStatement stm = connection.prepareStatement("SELECT * FROM orders WHERE order_Num = ?");
-        stm.setBigDecimal(1, id);
-        ResultSet rs = stm.executeQuery();
-        showMetadata(rs);
-        Order order = null;
-        if (rs.next()) {
-            order = new Order(rs.getBigDecimal("order_Num"), null, rs.getDate("order_Date"), rs.getString("mfr"),
-                    rs.getBigDecimal("qty"), rs.getBigDecimal("amount"));
-        }
-        rs.close();
-        stm.close();
-        connection.close();
-        return order;
+//        Connection connection = ConnectionToDbPool.getConnection();
+//        PreparedStatement stm = connection.prepareStatement("SELECT * FROM orders WHERE order_Num = ?");
+//        stm.setBigDecimal(1, id);
+//        ResultSet rs = stm.executeQuery();
+//        showMetadata(rs);
+//        Order order = null;
+//        if (rs.next()) {
+//            order = new Order(rs.getBigDecimal("order_Num"), null, rs.getDate("order_Date"), rs.getString("mfr"),
+//                    rs.getBigDecimal("qty"), rs.getBigDecimal("amount"));
+//        }
+//        rs.close();
+//        stm.close();
+//        connection.close();
+        return null;
     }
 
     private void showMetadata(ResultSet rs) throws SQLException {

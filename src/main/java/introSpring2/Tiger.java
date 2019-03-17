@@ -16,7 +16,6 @@ public class Tiger {
         }
     };
 
-
     private String voice;
 
     public Tiger() {

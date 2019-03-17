@@ -1,8 +1,8 @@
 package lesson22UsingHibernate;
 
-import dbTables.Customers;
-import dbTables.Products;
-import dbTables.Salesreps;
+import lesson16.entity.Customer;
+import lesson16.entity.Product;
+import lesson16.entity.Salesrep;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,11 +15,11 @@ public class OrderModel implements java.io.Serializable {
     private BigDecimal orderNum;
     private Date orderDate;
     private String mfr;
-    private Products products;
+    private Product product;
     private BigDecimal qty;
     private BigDecimal amount;
-    private Customers customers;
-    private Salesreps salesreps;
+    private Customer customer;
+    private Salesrep salesrep;
 
     public OrderModel() {
     }
@@ -28,11 +28,11 @@ public class OrderModel implements java.io.Serializable {
         this.orderNum = orderNum;
     }
 
-    public OrderModel(BigDecimal orderNum, Date orderDate, String mfr, Products product, BigDecimal qty, BigDecimal amount) {
+    public OrderModel(BigDecimal orderNum, Date orderDate, String mfr, Product product, BigDecimal qty, BigDecimal amount) {
         this.orderNum = orderNum;
         this.orderDate = orderDate;
         this.mfr = mfr;
-        this.products = product;
+        this.product = product;
         this.qty = qty;
         this.amount = amount;
     }
@@ -68,12 +68,12 @@ public class OrderModel implements java.io.Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PRODUCT")
-    public Products getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProducts(Products products) {
-        this.products = products;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Column(name = "QTY")
@@ -96,22 +96,22 @@ public class OrderModel implements java.io.Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUST")
-    public Customers getCustomers() {
-        return customers;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomers(Customers customers) {
-        this.customers = customers;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REP")
-    public Salesreps getSalesreps() {
-        return salesreps;
+    public Salesrep getSalesrep() {
+        return salesrep;
     }
 
-    public void setSalesreps(Salesreps salesreps) {
-        this.salesreps = salesreps;
+    public void setSalesrep(Salesrep salesrep) {
+        this.salesrep = salesrep;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class OrderModel implements java.io.Serializable {
                 " orderNum= " + orderNum +
                 ", orderDate= " + orderDate +
                 ", mfr= '" + mfr + '\'' +
-                ", products= " + products.getProductId() +
+                ", product= " + product.getProductId() +
                 ", qty= " + qty +
                 ", amount= " + amount +
                 '}';

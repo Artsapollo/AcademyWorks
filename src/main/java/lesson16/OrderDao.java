@@ -1,5 +1,7 @@
 package lesson16;
 
+import lesson16.entity.Order;
+
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Set;

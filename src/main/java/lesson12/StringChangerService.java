@@ -9,14 +9,14 @@ public class StringChangerService {
 
     public String addStart(String start, String input) {
         if (start != null && start.equals(input)) {
-            throw new IllegalArgumentException("Don\'t work with start.equals(input)");
+            throw new IllegalArgumentException("Don\'MainByContext work with start.equals(input)");
         }
         return start + input;
     }
 
     public String addEnd(String end, String input) {
         if (end != null && end.equals(input)) {
-            throw new IllegalArgumentException("Don\'t work with end.equals(input)");
+            throw new IllegalArgumentException("Don\'MainByContext work with end.equals(input)");
         }
         return input + end;
     }

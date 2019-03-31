@@ -45,9 +45,9 @@ public class StringChangerServiceNewTest {
 
     @Test
     public void testAddStartAndEndTotalLower() {
-        when(stringLowerUpperService.toLower(Mockito.anyString())).thenReturn("Start", "Input");
-        String expected = "Start";
-        String actual = stringChangerService.addStartAndEndTotalLower("Start", "End", "Input");
+        when(stringLowerUpperService.toLower(Mockito.anyString())).thenReturn("HoodTalks", "Input");
+        String expected = "HoodTalks";
+        String actual = stringChangerService.addStartAndEndTotalLower("HoodTalks", "End", "Input");
         Assert.assertEquals(expected, actual);
     }
 

@@ -7,11 +7,11 @@
     <persistence-unit name="PERSISTENCE" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
-        <class>lesson22.entry.Orders</class>
-        <class>dbTables.entry.Offices</class>
-        <class>dbTables.entry.Customers</class>
-        <class>dbTables.entry.Products</class>
-        <class>dbTables.entry.Salesreps</class>
+        <class>lesson16.entity.entry.Order</class>
+        <class>lesson16.entity.entry.Office</class>
+        <class>lesson16.entity.entry.Customer</class>
+        <class>lesson16.entity.entry.Product</class>
+        <class>lesson16.entity.entry.Salesrep</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>

@@ -1,8 +1,8 @@
 --ВЫВЕСТИ ИНФУ ПРО ЗАКАЗЧИКОВ КОТОРЫЕ КУПИЛИ ПРОДУКТЫ С БУКВОЙ А В НАЗВАНИИ
 select distinct *
-from customers c
+from customer c
 inner join orders o on c.cust_num = o.cust
-inner join products p on p.product_id = o.products
+inner join product p on p.product_id = o.product
 where p.description like '%а%';
 
 --STEP 26
@@ -10,29 +10,29 @@ where p.description like '%а%';
 -- Вывести список всех заказов, включая номер и стоимость заказа, а так же имя клиента и лимит кредита.
 select order_num, (qty * amount) as total, company, credit_limit
 from orders o
-inner join customers c on o.cust = c.cust_num
+inner join customer c on o.cust = c.cust_num
 order by order_num;
 
 --Вывести список всех служащих, включая города и регионы, в которых они работают.
 select empl_num, name, city, region
-from salesreps s
+from salesrep s
 inner join office o on s.rep_office = o.office
 order by s.name;
 
 --Вывести список офисов, включая их имена и рапорты
 select city, name, title
 from office o
-inner join salesreps s on o.mgr = s.empl_num;
+inner join salesrep s on o.mgr = s.empl_num;
 
 --Bывести список офисов, включая их имена и рапорты, а так же план продаж, которых превышает $600.00
 select city, name, title, target
 from office o
-inner join salesreps s on o.mgr = s.empl_num and target > 600;
+inner join salesrep s on o.mgr = s.empl_num and target > 600;
 
 --Bывести список всех заказов, в том числе и их стоимость и описание товаров
 select order_num, (qty * amount) as total, description
 from orders o
-inner join products p on o.mfr = p.mfr_id and o.products = p.product_id
+inner join product p on o.mfr = p.mfr_id and o.product = p.product_id
 order by order_num;
 
 --STEP 27
@@ -40,23 +40,23 @@ order by order_num;
 --Bывести список заказов стоимостью выше $700, включая имя служащего, принявшего заказ и имя клиента сделавшего его.
 select order_num, amount, name, company
 from orders o
-inner join customers c on o.cust = c.cust_num
-inner join salesreps s on o.rep = s.empl_num and amount > 700
+inner join customer c on o.cust = c.cust_num
+inner join salesrep s on o.rep = s.empl_num and amount > 700
 order by amount;
 
 -- Bывести список заказов стоимостью выше $700, включая имя клиента разместившего заказ и имя служащего закрепленного за этим клиентом
 select order_num, amount, company, name
 from orders o
-inner join customers c on o.cust = c.cust_num
-inner join salesreps s on c.cust_rep = s.empl_num and amount > 700
+inner join customer c on o.cust = c.cust_num
+inner join salesrep s on c.cust_rep = s.empl_num and amount > 700
 order by amount;
 
 --Вывести список заказов стоимостью выше $700, включая имя клиента, разместившего заказ и имя служащего, закрепленного за этим клиентом,
 --а так же офис, в котором работает этот служащий.
 select order_num, amount, company, name, city
 from orders o
-inner join customers c on o.cust = c.cust_num
-inner join salesreps s on c.cust_rep = s.empl_num
+inner join customer c on o.cust = c.cust_num
+inner join salesrep s on c.cust_rep = s.empl_num
 inner join office off on s.rep_office = off.office and amount > 700
 order by amount;
 
@@ -65,81 +65,81 @@ order by amount;
 --Найти все заказы, полученные в тот день, когда на работу был принят новый служащий
 select Order_Num, Amount, Order_Date, name
 from Orders o
-inner join salesreps s on o.order_date = s.hire_date;
+inner join salesrep s on o.order_date = s.hire_date;
 
 -- Получить все комбинации служащих офисов, где плановый объем продаж служащего больше, чем план какого либо офиса.
 select name, quota, city, target
-from salesreps s
+from salesrep s
 inner join office o on s.quota > o.target;
 
 --STEP 29
 
 --Показать имя, офис, и объем продаж каждого служащего.
 select name, s.sales, city
-from salesreps s
+from salesrep s
 inner join office o on s.rep_office = o.office;
 
 -- Сообщить всю информацию, о служащих и офисах где они работают.
 select *
-from salesreps s
+from salesrep s
 inner join office o on s.rep_office = o.office;
 
 select s.*, city, region
-from salesreps s
+from salesrep s
 inner join office o on s.rep_office = o.office;
 
 --STEP 30
 
 --Вывести список имен всех служащих и их руководителей
 select e.name, m.name
-from salesreps e
-inner join salesreps m on e.manager = m.empl_num;
+from salesrep e
+inner join salesrep m on e.manager = m.empl_num;
 
 -- Вывести список служащих, планы которых превышают планы их руководителей
 select s.name, s.quota, m.quota
-from salesreps s
-inner join salesreps m on s.manager = m.empl_num and s.quota > m.quota;
+from salesrep s
+inner join salesrep m on s.manager = m.empl_num and s.quota > m.quota;
 
 --Вывести список служащих, которые работают со своими руководителями в различных офисах, включая имена и офисы как служащих, так и руководителей.
 select emps.name, emp_office.city, mgrs.name, mgr_office.city
-from salesreps emps
+from salesrep emps
 inner join office emp_office on emps.rep_office = emp_office.office
-inner join salesreps mgrs on emps.manager = mgrs.empl_num
+inner join salesrep mgrs on emps.manager = mgrs.empl_num
 inner join office mgr_office on mgrs.rep_office = mgr_office.office and emps.rep_office <> mgrs.rep_office;
 
 --Показать все возможные комбинации служащих и городов
 select name, city
-from salesreps, office;
+from salesrep, office;
 
 --STEP 31
 
 --Показать средний плановый и средний фактический объем продаж в компании
 select avg(quota), avg(sales)
-from salesreps;
+from salesrep;
 
 --Показать средний процент выполнения плана в компании
 select avg(100 * (sales/quota))
-from salesreps;
+from salesrep;
 
 select avg(100 * (sales/quota)) as percent
-from salesreps;
+from salesrep;
 
 --Показать средний плановый и средний фактический объемы продаж, служащих компании
 select sum(quota), sum(sales)
-from salesreps;
+from salesrep;
 
 --Показать сумму всех заказов принятых Димой Маликовым
 select sum(amount)
-from orders, salesreps
+from orders, salesrep
 where name = 'Дима Маликов' and rep = empl_num;
 
 select sum(amount)
 from orders o
-inner join salesreps s on o.rep = s.empl_num and name = 'Дима Маликов';
+inner join salesrep s on o.rep = s.empl_num and name = 'Дима Маликов';
 
 --Вычислить среднюю цену товаров от производителя "ACI".
 select avg(price)
-from products
+from product
 where mfr_id = 'ACI';
 
 --Вычислить среднюю стоимость заказа, размещенного компанией "Acme Mfg". (идентификатор клиента 2103)
@@ -151,7 +151,7 @@ where cust = 2103;
 
 --Показать наибольший и наименьший плановые объемы продаж?
 select min(quota), max(quota)
-from salesreps;
+from salesrep;
 
 --Показать когда был сделан самый первый из всех содержащихся в базе данных заказов?
 select min(order_date)
@@ -159,15 +159,15 @@ from orders;
 
 --Показать наибольший процент выполнения плана среди всех служащих?
 select max(100 * (sales/quota))
-from salesreps;
+from salesrep;
 
 --Сколько клиентов у нашей компании?
 select count(cust_num)
-from customers;
+from customer;
 
 --Сколько служащих перевыполнили план?
 select count(name)
-from salesreps
+from salesrep
 where sales > quota;
 
 --Сколько имеется заказов стоимостью более $250 ?
@@ -183,5 +183,5 @@ where amount > 250;
 --заказов в процентах от лимитов кредита клиентов, а также среднюю стоимость заказов в процентах от плановых объемов продаж служащих.
 select avg(amount), sum(amount), (100 * avg(amount/credit_limit)), (100 * avg(amount/quota))
 from orders o
-inner join customers c on o.cust = c.cust_num
-inner join salesreps s on o.rep = s.empl_num;
+inner join customer c on o.cust = c.cust_num
+inner join salesrep s on o.rep = s.empl_num;

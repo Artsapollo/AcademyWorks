@@ -1,0 +1,8 @@
+{
+  "room" : "Tarasivska",
+  "teacher" : "Teacher [salary=666 Person [name=Serhii, surname=Pasko, yearOfBorn=1988]]",
+  "students" : [ [ "student", "Rabinovish" ], [ "student", "Kolom" ], [ "student", "Stefan" ] ],
+  "humanResources" : [ "HumanResource [startWorkYear=2016, Person [name=Efiria, surname=, yearOfBorn=1989]]", "HumanResource [startWorkYear=2015, Person [name=Karmen, surname=, yearOfBorn=1990]]" ],
+  "courier" : "Courier [tips= 50 Person [name=Pablo, surname=Skoropadskuy, yearOfBorn=1988]]",
+  "id" : 18122018
+}

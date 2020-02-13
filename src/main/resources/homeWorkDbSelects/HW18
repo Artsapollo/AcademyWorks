@@ -132,17 +132,20 @@ from product
 group by mfr_id
 having count(mfr_id) > 4;
 
---7. Вивести імя компанії, скільки вона тратила в середньому на покупки товарів виробників, котрі виготовляють більше 4-ьох товарів
+--7. Вивести імя компанії, скільки вона тратила в середньому на покупки товарів виробників,
+котрі виготовляють більше 4-ьох товарів
 select company, o.mfr, avg(amount)
 from customer c
 inner join orders o on c.cust_num = o.cust
 inner join (select mfr_id from product group by mfr_id having count(mfr_id) > 4) mfr on o.mfr = mfr.mfr_id
 group by company, o.mfr;
 
---8. Вивести скільки мінімально і максимально замовлень (ордерів) виконували менеджери що мають в прямому підпорядкуванні більше двух людей
+--8. Вивести скільки мінімально і максимально замовлень (ордерів) виконували менеджери
+що мають в прямому підпорядкуванні більше двух людей
 --manager, min(orders), max(orders)
+
 select min(order_qty), max(order_qty)
-from (select manager, count(order_num) order_qty
+from ( select manager, count(order_num) order_qty
 from salesrep s
 inner join orders o on s.empl_num = o.rep
 group by manager having count (manager) > 2);
